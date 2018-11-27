@@ -7,6 +7,7 @@ An automated pipeline for whole bacterial genome analysis directly from raw Illu
   * [Introduction](#introduction)
   * [Installation](#installation)
   * [Usage](#usage)
+  * [Enabling further analysis for *Escherichia* and *Salmonella*](#genera)
   * [Output](#output)
   * [Customizing the report](#report)
   * [License](#license)
