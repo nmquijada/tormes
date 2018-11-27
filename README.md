@@ -6,3 +6,8 @@ An automated pipeline for whole bacterial genome analysis directly from raw Illu
 ## Contents  
   * [Introduction](#introduction)
   * [Installation](#installation)
+  * [License](#license)
+
+
+## License
+TORMES is a free software, licensed under [GPLv3]
