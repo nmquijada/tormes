@@ -3,5 +3,6 @@ An automated pipeline for whole bacterial genome analysis directly from raw Illu
 
 <br>
 
-## Contents
-  *[Introduction]
+## Contents  
+  * [Introduction](#introduction)
+  * [Installation](#installation)
