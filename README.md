@@ -16,5 +16,35 @@ An automated pipeline for whole bacterial genome analysis directly from raw Illu
 
 <br>
 
+## Usage
+```
+Usage: tormes [options]
+
+OBLIGATORY OPTIONS:
+        -m/--metadata   Path to the file with the metadata regarding the samples
+                        The file must have an specific organization for the program to work
+                        If you don't have any or you would like to have an example or extra information,
+                        please type:
+                        /home/narciso/DISCO_TRABAJO/SCRIPTS/genomics_pipeline/TORMES/bin/tormes example-metadata
+        -o/--output     Path and name of the output directory
+        -r/--reference  Type path to reference genome (fasta, gbk)
+
+OTHER OPTIONS:
+        -a/--adapter    Path to the adapters file
+                        (default="/home/narciso/DISCO_TRABAJO/SCRIPTS/genomics_pipeline/TORMES/bin/../files/adapters.fa")
+        -c/--config     Path to the configuration file with the location of all dependencies
+                        (default="/home/narciso/DISCO_TRABAJO/SCRIPTS/genomics_pipeline/TORMES/bin/../files/config_file.txt")
+        --fast          Disable pangenome analysis for a quicker analysis (default='0')
+        -g/--genera     Type genera name to allow special analysis (default='none')
+                        Options available: Escherichia, Salmonella
+        -h/--help       Show this help
+        -q/--quality    Minimum mean phred score of the reads to survive (default=25) <integer>
+        -t/--threads    Number of threads to use (default=1) <integer>
+        --title         Path to a file containing the title in the project that will be used as title in the report
+                        Avoid using special characters. TORMES will perform a default title if this option is not used
+        -v/--version    Show version
+
+```
+
 ## License
 TORMES is a free software, licensed under [GPLv3](https://github.com/nmquijada/tormes/blob/master/LICENSE).
