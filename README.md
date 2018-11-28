@@ -62,7 +62,7 @@ A metadata text file is needed for TORMES to work by using the `-m/--metadata` o
  - First column must me called `Samples` and harbor samples names (avoid special characters).
  - Second column must be called `Read1` and harbor the path to the R1 (forward) reads (either fastq or fastq.gz).
  - Third column must be called `Read2` and harbor the path to the R2 (reverse) reads (either fastq or fastq.gz).
- - Fourth (and so on) columns are descriptive. The information included here is not needed for TORMES to work but will be included in the interactive report. You can add as many description columns as needed.
+ - Fourth (and so on) columns are descriptive. The information included here is not needed for TORMES to work but will be included in the interactive report. You can add as many description columns as needed (including information such as isolation date or source, different codification of each sample, *etc*.).
  
 <br>
 
