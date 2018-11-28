@@ -25,15 +25,13 @@ OBLIGATORY OPTIONS:
                         The file must have an specific organization for the program to work
                         If you don't have any or you would like to have an example or extra information,
                         please type:
-                        /home/narciso/DISCO_TRABAJO/SCRIPTS/genomics_pipeline/TORMES/bin/tormes example-metadata
+                        tormes example-metadata
         -o/--output     Path and name of the output directory
         -r/--reference  Type path to reference genome (fasta, gbk)
 
 OTHER OPTIONS:
         -a/--adapter    Path to the adapters file
-                        (default="/home/narciso/DISCO_TRABAJO/SCRIPTS/genomics_pipeline/TORMES/bin/../files/adapters.fa")
         -c/--config     Path to the configuration file with the location of all dependencies
-                        (default="/home/narciso/DISCO_TRABAJO/SCRIPTS/genomics_pipeline/TORMES/bin/../files/config_file.txt")
         --fast          Disable pangenome analysis for a quicker analysis (default='0')
         -g/--genera     Type genera name to allow special analysis (default='none')
                         Options available: Escherichia, Salmonella
