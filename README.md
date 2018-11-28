@@ -8,6 +8,7 @@ An automated pipeline for whole bacterial genome analysis directly from raw Illu
   * [Installation](#installation)
       * [Required dependencies](#required-dependencies)
   * [Usage](#usage)
+      * [Obligatory options](#obligatory-options)  
   * [Output](#output)
   * [Customizing the report](#report)
   * [Enabling further analysis for *Escherichia* and *Salmonella*](#genera)
@@ -51,5 +52,17 @@ tormes --metadata salmonella_metadata.txt --output Salmonella_TORMES_2018 --refe
 ```
 <br>
 
+### Obligatory options
+A metadata text file is needed for TORMES to work by using the `-m/--metadata` option. This file will include all the information regarding the sample and requires an specific organization:  
+
+
+Samples | Read1 | Read2 | Description1 | Description2 |
+------- | ----- | ----- | ------------ | ------------ |
+Sample1 | Forward read location | Reverse read location | Description 1 of Sample 1 | Description 2 of Sample 1 |
+Sample2 | Forward read location | Reverse read location | Description 1 of Sample 2 | Description 2 of Sample 2 |
+
+
+
+<br>
 ## License
 TORMES is a free software, licensed under [GPLv3](https://github.com/nmquijada/tormes/blob/master/LICENSE).
