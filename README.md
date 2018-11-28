@@ -54,16 +54,25 @@ tormes --metadata salmonella_metadata.txt --output Salmonella_TORMES_2018 --refe
 
 ### Obligatory options
 A metadata text file is needed for TORMES to work by using the `-m/--metadata` option. This file will include all the information regarding the sample and requires an specific organization:  
- - File should be tab separated
+ - Columns should be tab separated.
+ - First column must me called "Samples" and harbor samples names (avoid special characters).
+ - Second column must be called "Read1" and harbor the path to the R1 read (either fastq or fastq.gz).
+ - Third column must be called "Read2" and harbor the path to the R2 read (either fastq or fastq.gz).
+ - Fourth (and so on) columns are descriptive. They are no needed for the program to work but the information will appear in the report. You can add as many description columns as needed.
  
 <br>
+
+This is an example of how the metadata file should look like:  
 
 Samples | Read1 | Read2 | Description1 | Description2 |
 ------- | ----- | ----- | ------------ | ------------ |
 Sample1 | Forward read location | Reverse read location | Description 1 of Sample 1 | Description 2 of Sample 1 |
 Sample2 | Forward read location | Reverse read location | Description 1 of Sample 2 | Description 2 of Sample 2 |
 
+<br>
 
+If problems are encountered when performing the metadata file, you can generate a template metadata file by typing: `tormes example-metadata`.  
+This command will generate a file called `samples_metadata.txt` in your working directory that can be used as a template for your own dataset.
 
 <br>
 
