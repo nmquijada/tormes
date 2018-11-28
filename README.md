@@ -54,7 +54,9 @@ tormes --metadata salmonella_metadata.txt --output Salmonella_TORMES_2018 --refe
 
 ### Obligatory options
 A metadata text file is needed for TORMES to work by using the `-m/--metadata` option. This file will include all the information regarding the sample and requires an specific organization:  
-
+ - File should be tab separated
+ 
+<br>
 
 Samples | Read1 | Read2 | Description1 | Description2 |
 ------- | ----- | ----- | ------------ | ------------ |
@@ -64,5 +66,6 @@ Sample2 | Forward read location | Reverse read location | Description 1 of Sampl
 
 
 <br>
+
 ## License
 TORMES is a free software, licensed under [GPLv3](https://github.com/nmquijada/tormes/blob/master/LICENSE).
