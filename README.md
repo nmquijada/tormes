@@ -8,9 +8,9 @@ An automated pipeline for whole bacterial genome analysis directly from raw Illu
   * [Installation](#installation)
       * [Required dependencies](#required-dependencies)
   * [Usage](#usage)
-  * [Enabling further analysis for *Escherichia* and *Salmonella*](#genera)
   * [Output](#output)
   * [Customizing the report](#report)
+  * [Enabling further analysis for *Escherichia* and *Salmonella*](#genera)
   * [License](#license)
   * [Citation](#citation)
 
@@ -43,6 +43,12 @@ OTHER OPTIONS:
         -v/--version    Show version
 
 ```
+
+Example:
+```
+tormes --metadata salmonella_metadata.txt --output Salmonella_TORMES_2018 --reference S_enterica-CT02021853.fasta --threads 32 --genera Salmonella
+```
+
 
 ## License
 TORMES is a free software, licensed under [GPLv3](https://github.com/nmquijada/tormes/blob/master/LICENSE).
