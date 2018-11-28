@@ -43,12 +43,13 @@ OTHER OPTIONS:
         -v/--version    Show version
 
 ```
+<br>
 
 Example:
 ```
 tormes --metadata salmonella_metadata.txt --output Salmonella_TORMES_2018 --reference S_enterica-CT02021853.fasta --threads 32 --genera Salmonella
 ```
-
+<br>
 
 ## License
 TORMES is a free software, licensed under [GPLv3](https://github.com/nmquijada/tormes/blob/master/LICENSE).
