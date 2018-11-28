@@ -56,8 +56,8 @@ tormes --metadata salmonella_metadata.txt --output Salmonella_TORMES_2018 --refe
 A metadata text file is needed for TORMES to work by using the `-m/--metadata` option. This file will include all the information regarding the sample and requires an specific organization:  
  - Columns should be tab separated.
  - First column must me called "Samples" and harbor samples names (avoid special characters).
- - Second column must be called "Read1" and harbor the path to the R1 read (either fastq or fastq.gz).
- - Third column must be called "Read2" and harbor the path to the R2 read (either fastq or fastq.gz).
+ - Second column must be called "Read1" and harbor the path to the R1 (forward) reads (either fastq or fastq.gz).
+ - Third column must be called "Read2" and harbor the path to the R2 (reverse) reads (either fastq or fastq.gz).
  - Fourth (and so on) columns are descriptive. They are no needed for the program to work but the information will appear in the report. You can add as many description columns as needed.
  
 <br>
