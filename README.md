@@ -62,7 +62,7 @@ A metadata text file is needed for TORMES to work by using the `-m/--metadata` o
  
 <br>
 
-This is an example of how the metadata file should look like:  
+This is an example of how the metadata file should looks like:  
 
 Samples | Read1 | Read2 | Description1 | Description2 |
 ------- | ----- | ----- | ------------ | ------------ |
