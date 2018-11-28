@@ -52,7 +52,7 @@ tormes --metadata salmonella_metadata.txt --output Salmonella_TORMES_2018 --refe
 ```
 <br>
 
-The files used for this example, that were used in TORMES publication, can be found [here](hhts://github.com/nmquijada/tormes)
+The files used for this example, that were used in TORMES publication, can be found [here](hhts://github.com/nmquijada/tormes).
 
 <br>
 
