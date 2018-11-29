@@ -15,7 +15,7 @@ An automated pipeline for whole bacterial genome analysis directly from raw Illu
 
 <br>
 
-## What is TORMES?
+## What is TORMES? {introduction}
 
 TORMES is an open-source, user-friendly pipeline for whole bacterial genome sequencing (WGS) analysis directly from raw Illumina paired-end sequence data. TORMES does not have a limited numbers of samples to work and by following simple instructions, TORMES automates all steps included in a typical WGS analysis, including:  
 
