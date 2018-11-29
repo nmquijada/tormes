@@ -50,10 +50,6 @@ tormes --metadata salmonella_metadata.txt --output Salmonella_TORMES_2018 --refe
 ```
 <br>
 
-The files used for this example, that were used in TORMES publication, can be found [here](https://github.com/nmquijada/tormes/).
-
-<br>
-
 ### Obligatory options
 A metadata text file is needed for TORMES to work by using the `-m/--metadata` option. This file will include all the information regarding the sample and requires an specific organization:  
  - Columns should be tab separated.
