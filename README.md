@@ -80,6 +80,7 @@ This command will generate a file called `samples_metadata.txt` in your working 
 
 ## Output
 
+![image](https://raw.githubusercontent.com/nmquijada/tormes/master/images/output-distribution.png)
 
 An example of the interactive web-like file that TORMES generates can be visualized [here](https://nmquijada.github.io/tormes/).
 
