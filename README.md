@@ -10,8 +10,6 @@ An automated pipeline for whole bacterial genome analysis directly from raw Illu
   * [Usage](#usage)
       * [Obligatory options](#obligatory-options)  
   * [Output](#output)
-  * [Customizing the report](#report)
-  * [Enabling further analysis for *Escherichia* and *Salmonella*](#genera)
   * [License](#license)
   * [Citation](#citation)
 
@@ -77,6 +75,12 @@ Sample2 | Forward read location | Reverse read location | Description 1 of Sampl
 
 If problems are encountered when performing the metadata file, you can generate a template metadata file by typing: `tormes example-metadata`.  
 This command will generate a file called `samples_metadata.txt` in your working directory that can be used as a template for your own dataset.
+
+<br>
+
+## Output
+
+An example of the interactive web-like file that TORMES generates can be visualized [here]()
 
 <br>
 
