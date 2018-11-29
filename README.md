@@ -1,8 +1,6 @@
 # TORMES
 An automated pipeline for whole bacterial genome analysis directly from raw Illumina sequencing data.  
-(*still under development*)
-
-<br>
+(*repository under development*)
 
 ## Contents  
   * [Introduction](#introduction)
@@ -86,6 +84,12 @@ TORMES stores every file generated during the analysis is different directories 
 - **mlst**: results of Multi-Locus Sequence Typing (MLST) by using [mlst](https://github.com/tseemann/mlst).
 - **pangenome**: results of pangenome comparison based on the presence/absence of genes between the samples by using [Roary](https://sanger-pathogens.github.io/Roary/).
 - **report_files.tgz**: files necessary for the generation of the interactive web-like report. See further instructions here.
+- **sequencing_assembly_report.txt**: tabulated file including information of the sequencing (number of reads, average read length, sequencing depth), the assembly (number of contigs, genome length, average contig length, N50, GC content) and consensus taxonomic assignment.
+- **species_identification**: consensus taxonomic assignment of each sample by using [Kraken](https://ccb.jhu.edu/software/kraken/).
+- **tormes.log**: log file of TORMES analysis progress.
+- **tormes_report.html**: web-interactive report generated automatically after WGS analysis that summarizes the results. Can be open in any browser, shared and analyzed in a simple way.
+- **virulence_genes**: results of the scrrening for virulence genes by using [Abricate](https://github.com/tseemann/abricate) against the [Virulence Factors Database](http://www.mgc.ac.cn/VFs/).
+
 
 
 <br>
