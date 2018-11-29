@@ -81,6 +81,7 @@ This command will generate a file called `samples_metadata.txt` in your working 
 ## Output
 TORMES stores every file generated during the analysis is in a directory with the name of each step (assembly, annotation, *etc.*) within the main output directory specified with the `-o/--output` option.  
 The next image shows the organization of the directory specified with the `-o/--output` option once TORMES analysis is finished:  
+
 ![image](https://raw.githubusercontent.com/nmquijada/tormes/master/images/output-distribution.png)
 
 An example of the interactive web-like file that TORMES generates can be visualized [here](https://nmquijada.github.io/tormes/).
