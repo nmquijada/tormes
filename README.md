@@ -3,14 +3,40 @@ An automated pipeline for whole bacterial genome analysis directly from raw Illu
 (*repository under development*)
 
 ## Contents  
-  * [Introduction](#introduction)
+  * [What is TORMES?](#introduction)
   * [Installation](#installation)
       * [Required dependencies](#required-dependencies)
   * [Usage](#usage)
       * [Obligatory options](#obligatory-options)  
   * [Output](#output)
+  * [Customizing the summary-report](#custom-report)
   * [License](#license)
   * [Citation](#citation)
+
+<br>
+
+## What is TORMES?
+
+TORMES is an open-source, user-friendly pipeline for whole bacterial genome sequencing (WGS) analysis directly from raw Illumina paired-end sequence data. TORMES does not have a limited numbers of samples to work and by following simple instructions, TORMES automates all steps included in a typical WGS analysis, including:  
+
+1) Sequence quality filtering
+2) *De novo* genome assembly
+3) Draft genome ordering against a reference
+4) Genome annotation
+5) Multi-Locus Sequence Typing (MLST)
+6) Antibiotic resistance genes screening
+7) Virulence genes screening
+8) Pangenome comparison
+
+When working with *Escherichia* or *Salmonella* sequence data, extensive analysis can be enabled (by using the `-g/--genera`option), including:
+
+9) Antibiotic resistance screening based on point mutations
+10) Plasmid replicons screening
+11) Serotyping
+12) fimH-Typing (only for *Escherichia*)
+
+Once the analysis is finished, TORMES generates an interactive web-like report that can be opened in a web browser and shared and revised by researchers in a simple manner.
+
 
 <br>
 
@@ -90,11 +116,13 @@ TORMES stores every file generated during the analysis is different directories 
 - **tormes_report.html**: web-interactive report generated automatically after WGS analysis that summarizes the results. Can be open in any browser, shared and analyzed in a simple way.
 - **virulence_genes**: results of the scrrening for virulence genes by using [Abricate](https://github.com/tseemann/abricate) against the [Virulence Factors Database](http://www.mgc.ac.cn/VFs/).
 
+<br>
 
+Once the analysis is finished, TORMES summarizes the results in a interactive web-like report. An example of a report file can be visualized [here](https://nmquijada.github.io/tormes/files/).
 
 <br>
 
-An example of the interactive web-like file that TORMES generates can be visualized [here](https://nmquijada.github.io/tormes/files/).
+## Customizing the summary-report
 
 <br>
 
