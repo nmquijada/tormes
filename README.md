@@ -61,7 +61,11 @@ Three folders will be found:
 <br>
 
 ### Required dependencies
-TORMES is a pipeline and it requires several dependencies to work
+TORMES is a pipeline and it requires several dependencies to work:  
+  * [ABRicate](https://github.com/tseemann/abricate)
+  * [BLAST](ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/)
+
+
 
 
 <br>
