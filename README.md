@@ -84,7 +84,7 @@ Additional software when working with `-g/--genera Escherichia`.
 Additional software when working with `-g/--genera Salmonella`.
   * [SISTR](https://lfz.corefacility.ca/sistr-app/)
   
-Third-party software must be installed by the user and locations must be included in the **config_file.txt**.
+Third-party software must be installed by the user and locations must be included in the **config_file.txt**.  
 ** We are working in an automated protocol for third-party software installation that will be released soon **
 
 
