@@ -54,6 +54,11 @@ Three folders will be found:
       * adapters.fa: sequencing adaptors (will be used by Trimmomatic to remove them from the sequencing data)
       * config_file.txt: tab separated file withe the locations of the third-party tools used by tormes.
       * resfinder_notes.txt: tab separated file containing antibiotic resistance genes of the Resfinder database and antibiotic family they confer resistance to. It will be used by tormes-report for creating a figure for the interactive web-like report.
+  * **example-data**: all data used in TORMES' publication.  
+  
+<br>
+
+### Required dependencies
 
 <br>
 
