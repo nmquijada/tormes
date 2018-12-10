@@ -42,9 +42,11 @@ Once the analysis is finished, TORMES generates an interactive web-like report t
 
 ## Installation
 
-Download TORMES from the latest github release:  
+Download and install TORMES from the latest release from the GitHub reporsitory:  
 ```
 git clone --recursive https://github.com/nmquijada/tormes.git
+
+./tormes/install.sh
 ```
 
 Three folders will be found:
@@ -59,6 +61,8 @@ Three folders will be found:
 <br>
 
 ### Required dependencies
+TORMES is a pipeline and it requires several dependencies to work
+
 
 <br>
 
