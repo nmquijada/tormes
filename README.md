@@ -63,9 +63,29 @@ Three folders will be found:
 ### Required dependencies
 TORMES is a pipeline and it requires several dependencies to work:  
   * [ABRicate](https://github.com/tseemann/abricate)
-  * [BLAST](ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/)
-
-
+  * [FastTree](http://meta.microbesonline.org/fasttree/)
+  * [GNUParallel](https://www.gnu.org/software/parallel/)
+  * [Kraken](https://ccb.jhu.edu/software/kraken/)
+  * [mlst](https://github.com/tseemann/mlst)
+  * [Prinseq](http://prinseq.sourceforge.net/)
+  * [progrressiveMauve](http://darlinglab.org/mauve/mauve.html)
+  * [Prokka](https://github.com/tseemann/prokka)
+  * [Quast](http://quast.sourceforge.net/quast)
+  * [Roary](https://sanger-pathogens.github.io/Roary/)
+  * [roary2svg.pl](https://github.com/sanger-pathogens/Roary/blob/master/contrib/roary2svg/roary2svg.pl)
+  * [SPAdes](http://cab.spbu.ru/software/spades/)
+  * [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)
+  * [R](https://cran.r-project.org/)
+  
+Additional software when working with `-g/--genera Escherichia`.
+  * [FimTyper](https://bitbucket.org/genomicepidemiology/fimtyper/overview)
+  * [SerotypeFinder](https://bitbucket.org/genomicepidemiology/serotypefinder)
+  
+Additional software when working with `-g/--genera Salmonella`.
+  * [SISTR](https://lfz.corefacility.ca/sistr-app/)
+  
+Third-party software must be installed by the user and locations must be included in the **config_file.txt**.
+** We are working in an automated protocol for third-party software installation that will be released soon **
 
 
 <br>
