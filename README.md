@@ -10,8 +10,8 @@ An automated pipeline for whole bacterial genome analysis directly from raw Illu
       * [Obligatory options](#obligatory-options)  
   * [Output](#output)
   * [Customizing the summary-report](#custom-report)
-  * [License](#license)
   * [Citation](#citation)
+  * [License](#license)
 
 <br>
 
@@ -174,6 +174,18 @@ Once the analysis is finished, TORMES summarizes the results in a interactive we
 <br>
 
 ## Customizing the summary-report
+
+<br>
+
+## Citation
+
+TORMES has been submiteed for publication. If you use TORMES before publication is released, please cite as:
+
+Narciso M. Quijada, David Rodríguez-Lázaro and Marta Hernández (2018); https://github.com/nmquijada/tormes/  
+
+<br>
+
+The dependencies described in [this section](#required-dependencies) are the backbone of TORMES, and users are encouraged to cite them when using TORMES.
 
 <br>
 
