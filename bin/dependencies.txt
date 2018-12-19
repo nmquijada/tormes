@@ -1,0 +1,6 @@
+TORMES require several software to work.
+To safe time to the user, zipped files with the software required by TORMES are included in the "third-party-software" directory.
+The user might unzip them and follow dependency specific instructions for its installations.
+
+Once the third-party-software are installed, their paths should be included in the config_file.txt
+
