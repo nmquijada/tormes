@@ -86,8 +86,8 @@ Additional software when working with `-g/--genera Salmonella`.
 Third-party software must be installed by the user and locations must be included in the **config_file.txt**.  
 You can find an example of the config_file.txt [here](https://github.com/nmquijada/tormes/blob/master/files/config_file.txt). Please modify it properly with the location of the dependencies in your system (tab-separated format).  
   
-** We are working in an automated protocol for third-party software installation that will be released soon **
-
+** We are working in an automated protocol for third-party software installation that will be released soon **  
+At this moment, zipped files with the software are downloaded together with tormes and can be found in the directory bin/third-party-software/
 
 <br>
 
