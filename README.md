@@ -175,7 +175,7 @@ Once the analysis is finished, TORMES summarizes the results in a interactive we
 
 ## Citation
 
-TORMES has been submiteed for publication. If you use TORMES before publication is released, please cite as:  
+TORMES has been submitted for publication. If you use TORMES before publication is released, please cite as:  
   
 Narciso M. Quijada, David Rodríguez-Lázaro and Marta Hernández (2018); https://github.com/nmquijada/tormes  
 
