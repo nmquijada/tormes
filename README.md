@@ -79,6 +79,7 @@ TORMES is a pipeline and it requires several dependencies to work:
   * [SPAdes](http://cab.spbu.ru/software/spades/)
   * [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)
   * [R](https://cran.r-project.org/)
+    * R packages
   
 Additional software when working with `-g/--genera Escherichia`.
   * [FimTyper](https://bitbucket.org/genomicepidemiology/fimtyper/overview)
