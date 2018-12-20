@@ -44,8 +44,12 @@ Once the analysis is finished, TORMES generates an interactive web-like report t
 Download and install TORMES from the latest release from the GitHub reporsitory:  
 ```
 git clone --recursive https://github.com/nmquijada/tormes.git
+```
 
-./tormes/install.sh
+Include tormes bin in your PATH:  
+```
+export PATH="PATH/TO/tormes/bin":$PATH
+echo 'export PATH="PATH/TO/tormes/bin":$PATH' >> ~/.bashrc
 ```
 
 Three folders will be found:
