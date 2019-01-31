@@ -91,7 +91,7 @@ OBLIGATORY OPTIONS:
                         The file must have an specific organization for the program to work
                         If you don't have any or you would like to have an example or extra information,
                         please type:
-                        /home/marquina/.conda/envs/tormes_test2/bin/tormes example-metadata
+                        tormes example-metadata
         -o/--output     Path and name of the output directory
 
 OTHER OPTIONS:
