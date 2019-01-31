@@ -96,11 +96,11 @@ OBLIGATORY OPTIONS:
 
 OTHER OPTIONS:
         -a/--adapter    Path to the adapters file
-                        (default="/home/marquina/.conda/envs/tormes_test2/bin/../files/adapters.fa")
+                        (default="PATH/TO/TORMES/files/adapters.fa")
         --assembler     Select the assembler to use. Options available: 'spades', 'megahit'
                         (default='spades')
         -c/--config     Path to the configuration file with the location of all dependencies
-                        (default="/home/marquina/.conda/envs/tormes_test2/bin/../files/config_file.txt")
+                        (default="PATH/TO/TORMES/files/config_file.txt")
         --citation      Show citation
         --fast          Faster analysis (default='0')
                         ('megahit' is used as assembler and contig ordering and pangenome analysis are disabled)
