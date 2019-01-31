@@ -20,12 +20,12 @@ TORMES is an open-source, user-friendly pipeline for whole bacterial genome sequ
 
 1) Sequence quality filtering
 2) *De novo* genome assembly
-3) Draft genome ordering against a reference
+3) Draft genome ordering against a reference (optional)
 4) Genome annotation
-5) Multi-Locus Sequence Typing (MLST)
+5) Multi-Locus Sequence Typing (MLST, optional)
 6) Antibiotic resistance genes screening
 7) Virulence genes screening
-8) Pangenome comparison
+8) Pangenome comparison (optional)
 
 When working with *Escherichia* or *Salmonella* sequence data, extensive analysis can be enabled (by using the `-g/--genera`option), including:
 
@@ -41,25 +41,8 @@ Once the analysis is finished, TORMES generates an interactive web-like report t
 
 ## Installation
 
-Download and install TORMES from the latest release from the GitHub reporsitory:  
-```
-git clone --recursive https://github.com/nmquijada/tormes.git
-```
-
-Include tormes bin in your PATH:  
-```
-export PATH="PATH/TO/tormes/bin":$PATH
-echo 'export PATH="PATH/TO/tormes/bin":$PATH' >> ~/.bashrc
-```
-
-Three folders will be found:
-
-  * **bin**: includes the **tormes** (whole pipeline) and **tormes-report** (generates the interactive web-like report) pipelines.
-  * **files**: 
-      * adapters.fa: sequencing adaptors (will be used by Trimmomatic to remove them from the sequencing data)
-      * config_file.txt: tab separated file withe the locations of the third-party tools used by tormes.
-      * resfinder_notes.txt: tab separated file containing antibiotic resistance genes of the Resfinder database and antibiotic family they confer resistance to. It will be used by tormes-report for creating a figure for the interactive web-like report.
-  * **example-data**: all data used in TORMES' publication.  
+TORMES requires several software and dependencies to work.  
+We are currently working in providing TORMES as a conda environemnt that will be released very soon.
   
 <br>
 
@@ -68,7 +51,9 @@ TORMES is a pipeline and it requires several dependencies to work:
   * [ABRicate](https://github.com/tseemann/abricate)
   * [FastTree](http://meta.microbesonline.org/fasttree/)
   * [GNUParallel](https://www.gnu.org/software/parallel/)
+  * [ImageMagick](http://www.imagemagick.org/)
   * [Kraken](https://ccb.jhu.edu/software/kraken/)
+  * [Megahit](https://github.com/voutcn/megahit)
   * [mlst](https://github.com/tseemann/mlst)
   * [Prinseq](http://prinseq.sourceforge.net/)
   * [progrressiveMauve](http://darlinglab.org/mauve/mauve.html)
@@ -76,23 +61,25 @@ TORMES is a pipeline and it requires several dependencies to work:
   * [Quast](http://quast.sourceforge.net/quast)
   * [Roary](https://sanger-pathogens.github.io/Roary/)
   * [roary2svg.pl](https://github.com/sanger-pathogens/Roary/blob/master/contrib/roary2svg/roary2svg.pl)
+  * [Sickle](https://github.com/najoshi/sickle)
   * [SPAdes](http://cab.spbu.ru/software/spades/)
   * [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)
+  
   * [R](https://cran.r-project.org/)
     * R packages: [ggtree](https://bioconductor.org/packages/release/bioc/html/ggtree.html), [knitr](https://cran.r-project.org/web/packages/knitr/index.html), [plotly](https://cran.r-project.org/web/packages/plotly/index.html), [RColorBrewer](https://cran.r-project.org/web/packages/RColorBrewer/index.html), [reshape2](https://cran.r-project.org/web/packages/reshape2/index.html), [rmarkdown](https://cran.r-project.org/web/packages/rmarkdown/index.html)
   
 Additional software when working with `-g/--genera Escherichia`.
+  * [PointFinder](https://bitbucket.org/genomicepidemiology/pointfinder)
   * [FimTyper](https://bitbucket.org/genomicepidemiology/fimtyper/overview)
   * [SerotypeFinder](https://bitbucket.org/genomicepidemiology/serotypefinder)
   
 Additional software when working with `-g/--genera Salmonella`.
+  * [PointFinder](https://bitbucket.org/genomicepidemiology/pointfinder)
   * [SISTR](https://lfz.corefacility.ca/sistr-app/)
   
-Third-party software must be installed by the user and locations must be included in the **config_file.txt**.  
+TORMES will look to the software included in the **config_file.txt**. An automatic config_file.txt will be created after your installation with conda. However, you can change the PATH to each software if other software version would like to be used.  
 You can find an example of the config_file.txt [here](https://github.com/nmquijada/tormes/blob/master/files/config_file.txt). Please modify it properly with the location of the dependencies in your system (tab-separated format).  
   
-** We are working in an automated protocol for third-party software installation that will be released soon **  
-At this moment, zipped files with the software are downloaded together with tormes and can be found in the directory bin/third-party-software/
 
 <br>
 
@@ -105,18 +92,31 @@ OBLIGATORY OPTIONS:
                         The file must have an specific organization for the program to work
                         If you don't have any or you would like to have an example or extra information,
                         please type:
-                        tormes example-metadata
+                        /home/marquina/.conda/envs/tormes_test2/bin/tormes example-metadata
         -o/--output     Path and name of the output directory
-        -r/--reference  Type path to reference genome (fasta, gbk)
 
 OTHER OPTIONS:
         -a/--adapter    Path to the adapters file
+                        (default="/home/marquina/.conda/envs/tormes_test2/bin/../files/adapters.fa")
+        --assembler     Select the assembler to use. Options available: 'spades', 'megahit'
+                        (default='spades')
         -c/--config     Path to the configuration file with the location of all dependencies
-        --fast          Disable pangenome analysis for a quicker analysis (default='0')
+                        (default="/home/marquina/.conda/envs/tormes_test2/bin/../files/config_file.txt")
+        --citation      Show citation
+        --fast          Faster analysis (default='0')
+                        ('megahit' is used as assembler and contig ordering and pangenome analysis are disabled)
+        --filtering     Select the software for filtering the reads.
+                        Options available: 'prinseq', 'sickle', 'trimmomatic'
+                        (default="prinseq")
         -g/--genera     Type genera name to allow special analysis (default='none')
-                        Options available: Escherichia, Salmonella
+                        Options available: 'Escherichia', 'Salmonella'
         -h/--help       Show this help
-        -q/--quality    Minimum mean phred score of the reads to survive (default=25) <integer>
+        --min_len       Minimum length to the reads to survive after filtering (default=125) <integer>
+        --no_mlst       Disable MLST analysis (default='0')
+        --no_pangenome  Disable pangenome analysis (default='0')
+        -q/--quality    Minimum mean phred score of the reads to survive after filtering (default=25) <integer>
+        -r/--reference  Type path to reference genome (fasta, gbk) (default='none')
+                        Reference will be used for contig ordering of the draft genome
         -t/--threads    Number of threads to use (default=1) <integer>
         --title         Path to a file containing the title in the project that will be used as title in the report
                         Avoid using special characters. TORMES will perform a default title if this option is not used
@@ -160,9 +160,9 @@ TORMES stores every file generated during the analysis is different directories 
 
 - **annotation**: one directory per sample containing all the annotation files generated by [Prokka](https://github.com/tseemann/prokka).
 - **antibiotic_resistance_genes**: results of the scrrening for antibiotic resistance genes by using [Abricate](https://github.com/tseemann/abricate) against three databases: ARG-ANNOT, CARD and ResFinder.
-- **assembly**: files resulting from genome assembly with [SPAdes](http://cab.spbu.ru/software/spades/) (in gzipped directories, to unzip them type `tar xzf file-name.tgz`) and the assembly stats generated with [Quast](http://quast.sourceforge.net/quast).
-- **cleaned_reads**: reads the survived after quality filtering using [Prinseq](http://prinseq.sourceforge.net/) and [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic).
-- **draft_genomes**: stores the draft genomes once ordered against the reference included by the `-r/--reference`option by using [Mauve](http://darlinglab.org/mauve/mauve.html). Contigs < 200 bp are removed.
+- **assembly**: files resulting from genome assembly with [SPAdes](http://cab.spbu.ru/software/spades/) or [Megahit](https://github.com/voutcn/megahit) (in gzipped directories, to unzip them type `tar xzf file-name.tgz`) and the assembly stats generated with [Quast](http://quast.sourceforge.net/quast).
+- **cleaned_reads**: reads the survived after quality filtering using [Prinseq](http://prinseq.sourceforge.net/), [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic) or [Sickle](https://github.com/najoshi/sickle).
+- **draft_genomes**: stores the draft genomes. If the `-r/--reference` option is used, draft genomes will be ordered against a reference by using [Mauve](http://darlinglab.org/mauve/mauve.html) and stored here. Contigs < 200 bp are removed.
 - **mlst**: results of Multi-Locus Sequence Typing (MLST) by using [mlst](https://github.com/tseemann/mlst).
 - **pangenome**: results of pangenome comparison based on the presence/absence of genes between the samples by using [Roary](https://sanger-pathogens.github.io/Roary/).
 - **report_files.tgz**: files necessary for the generation of the interactive web-like report. See further instructions here.
