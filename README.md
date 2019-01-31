@@ -59,13 +59,13 @@ TORMES is a pipeline and it requires several dependencies to work:
   * [progrressiveMauve](http://darlinglab.org/mauve/mauve.html)
   * [Prokka](https://github.com/tseemann/prokka)
   * [Quast](http://quast.sourceforge.net/quast)
+  * [R](https://cran.r-project.org/)
+    * R packages: [ggtree](https://bioconductor.org/packages/release/bioc/html/ggtree.html), [knitr](https://cran.r-project.org/web/packages/knitr/index.html), [plotly](https://cran.r-project.org/web/packages/plotly/index.html), [RColorBrewer](https://cran.r-project.org/web/packages/RColorBrewer/index.html), [reshape2](https://cran.r-project.org/web/packages/reshape2/index.html), [rmarkdown](https://cran.r-project.org/web/packages/rmarkdown/index.html)
   * [Roary](https://sanger-pathogens.github.io/Roary/)
   * [roary2svg.pl](https://github.com/sanger-pathogens/Roary/blob/master/contrib/roary2svg/roary2svg.pl)
   * [Sickle](https://github.com/najoshi/sickle)
   * [SPAdes](http://cab.spbu.ru/software/spades/)
   * [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)
-  * [R](https://cran.r-project.org/)
-    * R packages: [ggtree](https://bioconductor.org/packages/release/bioc/html/ggtree.html), [knitr](https://cran.r-project.org/web/packages/knitr/index.html), [plotly](https://cran.r-project.org/web/packages/plotly/index.html), [RColorBrewer](https://cran.r-project.org/web/packages/RColorBrewer/index.html), [reshape2](https://cran.r-project.org/web/packages/reshape2/index.html), [rmarkdown](https://cran.r-project.org/web/packages/rmarkdown/index.html)
   
 Additional software when working with `-g/--genera Escherichia`.
   * [PointFinder](https://bitbucket.org/genomicepidemiology/pointfinder)
