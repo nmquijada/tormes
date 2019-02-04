@@ -42,7 +42,7 @@ Once the analysis is finished, TORMES generates an interactive web-like report t
 ## Installation
 
 TORMES requires several software and dependencies to work.  
-We are currently working in providing TORMES as a conda environemnt that will be released very soon.
+We are currently working in providing TORMES as a conda enviroment that will be released very soon.
   
 <br>
 
