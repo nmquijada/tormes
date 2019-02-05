@@ -1,0 +1,80 @@
+#! /bin/bash
+
+TORMES=$0
+while [ -h "$TORMES" ]; do # resolve $TORMES until the file is no longer a symlink
+  TORMESDIR="$( cd -P "$( dirname "$0" )" && pwd )"
+  TORMES="$(readlink "$TORMES")"
+  [[ $TORMES != /* ]] && TORMES="$TORMESDIR/$TORMES" # if $TORMES is a symlink, resolve it relative to the path where the symlink file was located
+done
+TORMESDIR="$( cd -P "$( dirname "$TORMES" )" && pwd )"
+TAB="$(printf '\t')"
+
+if [ -d "$TORMESDIR/../CGE-modules/" ]; then
+	echo -e "\nERROR: $TORMESDIR/../CGE-modules/ already exist! Please check \n"
+	exit 1
+fi
+
+echo -e "\nInstalling missing R packages\n"
+Rscript -e 'library(BiocManager); BiocManager::install("ggtree", version = "3.8")'
+
+echo -e "\nInstalling missing CGE modules\n"
+mkdir -p $TORMESDIR/../CGE-modules/pointfinder
+git clone https://bitbucket.org/genomicepidemiology/pointfinder.git $TORMESDIR/../CGE-modules/pointfinder
+git clone https://bitbucket.org/genomicepidemiology/pointfinder_db.git $TORMESDIR/../CGE-modules/pointfinder/pointfinder_db
+
+mkdir -p $TORMESDIR/../CGE-modules/fimtyper
+git clone https://bitbucket.org/genomicepidemiology/fimtyper.git $TORMESDIR/../CGE-modules/fimtyper
+git clone https://bitbucket.org/genomicepidemiology/fimtyper_db $TORMESDIR/../CGE-modules/fimtyper/fimtyper_db
+cpanm Try::Tiny
+
+mkdir -p $TORMESDIR/../CGE-modules/serotypefinder
+git clone https://bitbucket.org/genomicepidemiology/serotypefinder.git $TORMESDIR/../CGE-modules/serotypefinder
+git clone https://bitbucket.org/genomicepidemiology/serotypefinder_db.git $TORMESDIR/../CGE-modules/serotypefinder/serotypefinder_db
+
+echo -e "\nInstalling roary2svg.pl\n"
+wget https://raw.githubusercontent.com/sanger-pathogens/Roary/master/contrib/roary2svg/roary2svg.pl -O $TORMESDIR/roary2svg.pl
+chmod 777 $TORMESDIR/roary2svg.pl
+
+echo -e "\nInstalling Mini-Kraken DB 8GB\n"
+mkdir -p $TORMESDIR/../db/minikraken-DB
+wget https://ccb.jhu.edu/software/kraken/dl/minikraken_20171019_8GB.tgz -P $TORMESDIR/../db/minikraken-DB
+tar xzf $TORMESDIR/../db/minikraken-DB/minikraken_20171019_8GB.tgz -C $TORMESDIR/../db/minikraken-DB/minikraken_20171019_8GB
+rm $TORMESDIR/../db/minikraken-DB/minikraken_20171019_8GB.tgz
+
+echo -e "\nSetting up config_file.txt"
+mkdir -p $TORMESDIR/../files/
+#touch $TORMESDIR/../files/config_file.txt
+cat<<EOF>$TORMESDIR/../files/config_file.txt
+#FILES${TAB}LOCATION
+ABRICATE${TAB}$(which abricate)
+BLAST-2.6_or_later-BINARIES${TAB}$(which blastn | sed "s/blastn$//")
+CONVERT${TAB}$(which convert)
+FASTTREE${TAB}$(which fasttree)
+FIMTYPER${TAB}$TORMESDIR/../CGE-modules/fimtyper/fimtyper.pl
+FIMTYPER-DATABASE${TAB}$TORMESDIR/../CGE-modules/fimtyper/fimtyper_db
+KRAKEN${TAB}$(which kraken)
+KRAKEN-REPORT${TAB}$(which kraken-report)
+KRAKEN-DATABASE${TAB}$TORMESDIR/../db/minikraken-DB/minikraken_20171019_8GB
+MAUVE${TAB}$(which Mauve | sed "s/Mauve$/..\/share\/mauve-2.4.0.r4736-0\/Mauve.jar/")
+MAUVE-BINARIES${TAB}$(which Mauve | sed "s/Mauve$//")
+MEGAHIT${TAB}$(which megahit)
+MLST${TAB}$(which mlst)
+PARALLEL${TAB}$(which parallel)
+POINTFINDER${TAB}$TORMESDIR/../CGE-modules/pointfinder/PointFinder.py
+POINTFINDER-DATABASE${TAB}$TORMESDIR/../CGE-modules/pointfinder/pointfinder_db
+PRINSEQ${TAB}$(which prinseq-lite.pl)
+PROKKA${TAB}$(which prokka)
+QUAST${TAB}$(which quast)
+RSCRIPT${TAB}$(which Rscript)
+ROARY${TAB}$(which roary)
+ROARY2SVG${TAB}$TORMESDIR/roary2svg.pl
+SEROTYPEFINDER${TAB}$TORMESDIR/../CGE-modules/serotypefinder/serotypefinder.py
+SEROTYPEFINDER-DATABASE${TAB}$TORMESDIR/../CGE-modules/serotypefinder/serotypefinder_db
+SICKLE${TAB}$(which sickle)
+SISTR${TAB}$(which sistr)
+SPADES${TAB}$(which spades.py)
+TRIMMOMATIC${TAB}$(which trimmomatic)
+EOF
+
+echo -e "\nTORMES is installed and ready to use. Enjoy!\n"
+
