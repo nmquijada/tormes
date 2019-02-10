@@ -1,3 +1,6 @@
+[![Anaconda-Server Badge](https://anaconda.org/nmquijada/tormes/badges/version.svg)](https://anaconda.org/nmquijada/tormes)
+<br>
+
 # TORMES
 An automated pipeline for whole bacterial genome analysis directly from raw Illumina sequencing data.  
 (*repository under development*)
