@@ -52,6 +52,7 @@ wget https://anaconda.org/nmquijada/tormes-1.0/2019.02.07.212317/download/tormes
 conda env create -n tormes-1.0 --file tormes-1.0.yml
 ```
 <br>
+
 To activate TORMES environment run:  
 
 ```
@@ -65,7 +66,7 @@ Additionally, the first time you are using TORMES, run (after activating TORMES 
 tormes-setup
 ```
 
-This step will install additional dependencies not available in conda, including the [MiniKrakenDB_8GB](https://ccb.jhu.edu/software/kraken/) required by Kraken to work (the database size is ~8GB and might take some time to download). Additionally it will automatically create the **config_file.txt** (see below).
+This step will install additional dependencies not available in conda, including the [MiniKrakenDB_8GB](https://ccb.jhu.edu/software/kraken/) required by Kraken to work (the database size is ~8GB and might take some time to download). Additionally it will automatically create the **config_file.txt** required for TORMES to work (see below).
 
 <br>
 
@@ -99,7 +100,7 @@ Additional software when working with `-g/--genera Salmonella`.
   * [PointFinder](https://bitbucket.org/genomicepidemiology/pointfinder)
   * [SISTR](https://lfz.corefacility.ca/sistr-app/)
   
-TORMES will look to the software included in the **config_file.txt**. An automatic config_file.txt will be created after your installation with conda. However, you can change the PATH to each software if other software version would like to be used.  
+TORMES will look to the software included in the **config_file.txt**. An automatic config_file.txt will be created after running `tormes-setup` command. However, you can change the PATH to each software if other software version would like to be used.  
 You can find an example of the config_file.txt [here](https://github.com/nmquijada/tormes/blob/master/files/config_file.txt). Please modify it properly with the location of the dependencies in your system (tab-separated format).  
   
 
