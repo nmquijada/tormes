@@ -65,7 +65,7 @@ Additionally, the first time you are using TORMES, run (after activating TORMES 
 tormes-setup
 ```
 
-This step will install additional dependencies not available in conda, including the [MiniKrakenDB_8GB](https://ccb.jhu.edu/software/kraken/) required by Kraken to work (the database size is ~8GB and might take some time to download). Additionally it will automatically create the **config_file.txtx** (see below).
+This step will install additional dependencies not available in conda, including the [MiniKrakenDB_8GB](https://ccb.jhu.edu/software/kraken/) required by Kraken to work (the database size is ~8GB and might take some time to download). Additionally it will automatically create the **config_file.txt** (see below).
 
 <br>
 
