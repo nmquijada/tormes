@@ -100,8 +100,8 @@ Additional software when working with `-g/--genera Salmonella`.
   * [PointFinder](https://bitbucket.org/genomicepidemiology/pointfinder)
   * [SISTR](https://lfz.corefacility.ca/sistr-app/)
   
-TORMES will look to the software included in the **config_file.txt**. An automatic config_file.txt will be created after running `tormes-setup` command. However, you can change the PATH to each software if other software version would like to be used.  
-You can find an example of the config_file.txt [here](https://github.com/nmquijada/tormes/blob/master/files/config_file.txt). Please modify it properly with the location of the dependencies in your system (tab-separated format).  
+TORMES will look to the software included in the **config_file.txt**, which is a simple tab-separated text file indicating the software/database and its location. An automatic config_file.txt will be created after running `tormes-setup` command. However, you can change the PATH to each software if other software version would like to be used (if you do so, respect software names and tab-separation).  
+You can find an example of the config_file.txt [here](https://github.com/nmquijada/tormes/blob/master/files/config_file.txt).  
   
 
 <br>
