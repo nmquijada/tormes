@@ -31,7 +31,7 @@ TORMES is an open-source, user-friendly pipeline for whole bacterial genome sequ
 7) Virulence genes screening
 8) Pangenome comparison (optional)
 
-When working with *Escherichia* or *Salmonella* sequence data, extensive analysis can be enabled (by using the `-g/--genera`option), including:
+When working with *Escherichia* or *Salmonella* sequence data, extensive analysis can be enabled (by using the `-g/--genera` option), including:
 
 9) Antibiotic resistance screening based on point mutations
 10) Plasmid replicons screening
