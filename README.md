@@ -48,7 +48,7 @@ Once the analysis is finished, TORMES generates an interactive web-like report t
 TORMES is a pipeline that requries a lot of dependenices to work. It has been devised to be used as a conda environment. For installing TORMES an all its dependencies run:  
 
 ```
-wget https://anaconda.org/nmquijada/tormes-1.0/2019.02.07.212317/download/tormes-1.0.yml
+wget https://anaconda.org/nmquijada/tormes-1.0/2019.03.19.094558/download/tormes-1.0.yml
 conda env create -n tormes-1.0 --file tormes-1.0.yml
 ```
 <br>
