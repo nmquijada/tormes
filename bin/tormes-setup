@@ -38,7 +38,7 @@ chmod 777 $TORMESDIR/roary2svg.pl
 echo -e "\nInstalling Mini-Kraken DB 8GB\n"
 mkdir -p $TORMESDIR/../db/minikraken-DB
 wget https://ccb.jhu.edu/software/kraken/dl/minikraken_20171019_8GB.tgz -P $TORMESDIR/../db/minikraken-DB
-tar xzf $TORMESDIR/../db/minikraken-DB/minikraken_20171019_8GB.tgz -C $TORMESDIR/../db/minikraken-DB/minikraken_20171019_8GB
+tar xzf $TORMESDIR/../db/minikraken-DB/minikraken_20171019_8GB.tgz -C $TORMESDIR/../db/minikraken-DB
 rm $TORMESDIR/../db/minikraken-DB/minikraken_20171019_8GB.tgz
 
 echo -e "\nSetting up config_file.txt"

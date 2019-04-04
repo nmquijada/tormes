@@ -163,7 +163,7 @@ case $ARGS in
             ;;
         --citation)
             echo -e "\n If using TORMES, please cite:"
-	    echo -e "\n Quijada, N.M., Rodriguez-Lazaro, D., Hernandez, M. TORMES. (2018) GitHub (https://github.com/nmquijada/tormes/)\n"
+	    echo -e "\n Quijada, N.M., Rodriguez-Lazaro, D. and  Hernandez, M. TORMES. (2019) GitHub (https://github.com/nmquijada/tormes/)\n"
             exit 1
             ;;
 	-c|--config)
@@ -700,7 +700,7 @@ $PARALLEL -j $CPUS --gnu rm -rf ::: $OUTWD/Raw_reads/
 if [ "$FILTERING" == 'prinseq' ]; then
 	$PARALLEL -j $CPUS --gnu gzip -d ::: $OUTWD/cleaned_reads/*gz
 
-	$PARALLEL -j $CPUS -a $OUTWD/list.tmp $PRINSEQ -verbose -fastq $OUTWD/cleaned_reads/{}.noadapt.R1.fastq -fastq2 $OUTWD/cleaned_reads/{}.noadapt.R2.fastq -out_good $OUTWD/cleaned_reads/{}.ok -out_format 3 -out_bad null -min_len $MINLEN -min_qual_mean $QUALITY -trim_qual_right $QUALITY -trim_qual_window 15 -trim_qual_type mean
+	$PARALLEL -j $CPUS -a $OUTWD/list.tmp perl $PRINSEQ -verbose -fastq $OUTWD/cleaned_reads/{}.noadapt.R1.fastq -fastq2 $OUTWD/cleaned_reads/{}.noadapt.R2.fastq -out_good $OUTWD/cleaned_reads/{}.ok -out_format 3 -out_bad null -min_len $MINLEN -min_qual_mean $QUALITY -trim_qual_right $QUALITY -trim_qual_window 15 -trim_qual_type mean
 
 	$PARALLEL -j $CPUS --gnu rm -f ::: $OUTWD/cleaned_reads/*singletons*
 	$PARALLEL -j $CPUS --gnu rm -rf ::: $OUTWD/cleaned_reads/*noadapt*
@@ -728,10 +728,10 @@ ASSEMBLYJOBS=$(echo "${CPUS}/8" | bc)
 
 if [ "$ASSEMBLER" == 'spades' ]; then
 	if [ ${ASSEMBLYJOBS} -gt 1 ]; then
-		$PARALLEL -j ${ASSEMBLYJOBS} -a $OUTWD/list.tmp $SPADES --careful -1 $OUTWD/cleaned_reads/{}.ok_1.fastq.gz -2 $OUTWD/cleaned_reads/{}.ok_2.fastq.gz -o $OUTWD/assembly/{}_assembly -t 8
+		$PARALLEL -j ${ASSEMBLYJOBS} -a $OUTWD/list.tmp python $SPADES --careful -1 $OUTWD/cleaned_reads/{}.ok_1.fastq.gz -2 $OUTWD/cleaned_reads/{}.ok_2.fastq.gz -o $OUTWD/assembly/{}_assembly -t 8
 	else
 		for i in $SAMPLE; do
-		     $SPADES --careful -1 $OUTWD/cleaned_reads/$i\.ok_1.fastq.gz -2 $OUTWD/cleaned_reads/$i\.ok_2.fastq.gz -o $OUTWD/assembly/$i\_assembly -t $CPUS
+		     python $SPADES --careful -1 $OUTWD/cleaned_reads/$i\.ok_1.fastq.gz -2 $OUTWD/cleaned_reads/$i\.ok_2.fastq.gz -o $OUTWD/assembly/$i\_assembly -t $CPUS
 		done
 	fi
 fi
@@ -762,7 +762,7 @@ if [ -e $OUTWD/excludinglist.tmp ]; then
 	rm -f $OUTWD/excludinglist.tmp
 fi
 
-$PARALLEL -j $CPUS -a $OUTWD/list.tmp $PRINSEQ -fasta $OUTWD/assembly/{}\_assembly/contigs.fasta -min_len 200 -out_good $OUTWD/draft_genomes/{} -out_bad null
+$PARALLEL -j $CPUS -a $OUTWD/list.tmp perl $PRINSEQ -fasta $OUTWD/assembly/{}\_assembly/contigs.fasta -min_len 200 -out_good $OUTWD/draft_genomes/{} -out_bad null
 
 for i in $SAMPLE; do
 	if [ ! -e $OUTWD/draft_genomes/${i}.fasta ]; then
