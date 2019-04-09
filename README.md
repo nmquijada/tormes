@@ -198,7 +198,7 @@ TORMES stores every file generated during the analysis is different directories 
 <br>
 
 Once the WGS analysis is ended, TORMES summarizes the results in a interactive web-like report file. An example of a report file can be visualized [here](https://nmquijada.github.io/tormes/files/).  
-For the generation of the report file, `tormes` calls `tormes-report` (included in the TORMES pipeline) that generates a *rmarkdown* file (in [R](https://cran.r-project.org/) environment), called `tormes_report.Rmd`, that can be modified by the user for the generation of customized reports without the need of running the entire analysis. 
+For the generation of the report file, `tormes` calls `tormes-report` (included in the TORMES pipeline) that generates a *rmarkdown* file (in [R](https://cran.r-project.org/) environment), called `tormes_report.Rmd`, that can be modified by the user for the generation of customized reports without the need of re-running the entire analysis. 
 
 <br>
 
