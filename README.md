@@ -3,7 +3,7 @@
 <br>
 
 # TORMES
-An automated pipeline for whole bacterial genome analysis directly from raw Illumina sequencing data.  
+An automated pipeline for whole bacterial genome analysis directly from raw Illumina paired-end sequencing data.  
 (*repository under development*)
 
 ## Contents  
@@ -20,7 +20,7 @@ An automated pipeline for whole bacterial genome analysis directly from raw Illu
 
 ## What is TORMES?
 
-TORMES is an open-source, user-friendly pipeline for whole bacterial genome sequencing (WGS) analysis directly from raw Illumina paired-end sequence data. TORMES does not have a limited numbers of samples to work and by following simple instructions, TORMES automates all steps included in a typical WGS analysis, including:  
+TORMES is an open-source, user-friendly pipeline for whole bacterial genome sequencing (WGS) analysis directly from raw Illumina paired-end sequenceing data. TORMES work with every bacterial WGS dataset, regardless the number, origin or species. By following very simple instructions, TORMES automates all steps included in a typical WGS analysis, including:  
 
 1) Sequence quality filtering
 2) *De novo* genome assembly
@@ -38,7 +38,7 @@ When working with *Escherichia* or *Salmonella* sequence data, extensive analysi
 11) Serotyping
 12) fimH-Typing (only for *Escherichia*)
 
-Once the analysis is finished, TORMES generates an interactive web-like report that can be opened in a web browser and shared and revised by researchers in a simple manner.
+Once the WGS analysis is ended, TORMES summarizes the results in an interactive web-like file that can be opened in any web browser, making the results easy to analyze, compare and share.
 
 
 <br>
@@ -197,7 +197,8 @@ TORMES stores every file generated during the analysis is different directories 
 
 <br>
 
-Once the analysis is finished, TORMES summarizes the results in a interactive web-like report. An example of a report file can be visualized [here](https://nmquijada.github.io/tormes/files/).
+Once the WGS analysis is ended, TORMES summarizes the results in a interactive web-like report file. An example of a report file can be visualized [here](https://nmquijada.github.io/tormes/files/).  
+For the generation of the report file, `tormes` calls `tormes-report` (included in the TORMES pipeline) that generates a *rmarkdown* file (in [R](https://cran.r-project.org/) environment), called `tormes_report.Rmd`, that can be modified by the user for the generation of customized reports without the need of running the entire analysis. 
 
 <br>
 
@@ -205,7 +206,7 @@ Once the analysis is finished, TORMES summarizes the results in a interactive we
 
 TORMES has been submitted for publication. If you use TORMES before publication is released, please cite as:  
   
-Narciso M. Quijada, David Rodríguez-Lázaro and Marta Hernández (2018); TORMES, https://github.com/nmquijada/tormes  
+Narciso M. Quijada, David Rodríguez-Lázaro and Marta Hernández (2019); TORMES, https://github.com/nmquijada/tormes  
 
 <br>
 
