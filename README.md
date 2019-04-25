@@ -48,7 +48,7 @@ Once the WGS analysis is ended, TORMES summarizes the results in an interactive 
 TORMES is a pipeline that requries a lot of dependenices to work. It has been devised to be used as a conda environment. For installing TORMES an all its dependencies run:  
 
 ```
-wget https://anaconda.org/nmquijada/tormes-1.0/2019.03.19.094558/download/tormes-1.0.yml
+wget https://anaconda.org/nmquijada/tormes-1.0/2019.04.25.180147/download/tormes-1.0.yml
 conda env create -n tormes-1.0 --file tormes-1.0.yml
 ```
 <br>
