@@ -204,9 +204,10 @@ For the generation of the report file, `tormes` calls `tormes-report` (included 
 
 ## Citation
 
-TORMES has been submitted for publication. If you use TORMES before publication is released, please cite as:  
+Please cite the following pubication if you are using TORMES.  
   
-Narciso M. Quijada, David Rodríguez-Lázaro and Marta Hernández (2019); TORMES, https://github.com/nmquijada/tormes  
+Narciso M. Quijada, David Rodríguez-Lázaro, Jose María Eiros and Marta Hernández (2019); TORMES: an automated pipeline for whole bacterial genome analysis; *Bioinformatics*, https://doi.org/10.1093/bioinformatics/btz220
+  
 
 <br>
 
