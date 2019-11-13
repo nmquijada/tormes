@@ -239,7 +239,8 @@ Please cite the following pubication if you are using TORMES:
 
 <br>
   
-Narciso M. Quijada, David Rodríguez-Lázaro, Jose María Eiros and Marta Hernández (2019); TORMES: an automated pipeline for whole bacterial genome analysis; *Bioinformatics*, https://doi.org/10.1093/bioinformatics/btz220
+  
+Narciso M Quijada, David Rodríguez-Lázaro, Jose María Eiros and Marta Hernández (2019). TORMES: an automated pipeline for whole bacterial genome analysis. *Bioinformatics*, Volume 35, Issue 21, Pages 4207–4212, https://doi.org/10.1093/bioinformatics/btz220
   
 
 <br>
