@@ -254,6 +254,6 @@ TORMES is a free software, licensed under [GPLv3](https://github.com/nmquijada/t
 <br>
 
 ## Versions history
-- *v.1.1*: solved issues from v.1.0. *(will be released soon)*
+- *v.1.1*: solved issues from v.1.0. New features: quality control reports of the reads before/after quality filtering and possibility to start the analysis directly from the (draft)genomes *(will be released soon)*
 - *v.1.0* (current): original version of the TORMES pipeline.
 
