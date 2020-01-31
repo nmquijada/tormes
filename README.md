@@ -237,14 +237,15 @@ This command will generate a new "**tormes_report.html**".
 ## Open-source and networking community
 
 TORMES was devised with the aim of being an open-source and easy tool that everybody can use for their WGS experiments. Bacterial bioinformatics is developing rapidly, and the availability of open code and tools is crucial for the scientific community to benefit from these developments.  
+
 Additionally, TORMES is intended to be a networking project with users providing their feedback and personal experience so that TORMES can become a more complete pipeline including as many analyses and genera as possible.  
 There’s been almost a year since we launch this tool and we are very happy with the responses of the community. Most of the suggestions are considered for further improvements of the TORMES pipeline and some users have also shared their code that could be used to extend TORMES analysis and/or to overcome some issues/challenges. 
 We are working for a finer tool for WGS that can be freely provided to the community and definitively the feedback from users is being pivotal.
  
 <br>
 
-In this issue - https://github.com/nmquijada/tormes/issues/16 - @biobrad summarizes some of the errors he has run through and shares instructions on how to solve them.
-Additionally, @biobrad has developed [**Tormesbot**]( https://github.com/biobrad/tormesbot/wiki/Tormesbot), a tool to assist other microbiologists who are not computer savvy in manipulating the metadata and parsing arguments to a HPC environment.
+In this issue - https://github.com/nmquijada/tormes/issues/16 - [**@biobrad**](https://github.com/biobrad) summarizes some of the errors he has run through and shares instructions on how to solve them.
+Additionally, [**@biobrad**](https://github.com/biobrad) has developed [**Tormesbot**]( https://github.com/biobrad/tormesbot/wiki/Tormesbot), a tool to assist other microbiologists who are not computer savvy in manipulating the metadata and parsing arguments to a HPC environment.
 
 
 <br>
