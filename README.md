@@ -244,8 +244,8 @@ We are working for a finer tool for WGS that can be freely provided to the commu
  
 <br>
 
-In this issue - https://github.com/nmquijada/tormes/issues/16 - [**@biobrad**](https://github.com/biobrad) summarizes some of the errors he has run through and shares instructions on how to solve them.
-Additionally, [**@biobrad**](https://github.com/biobrad) has developed [**Tormesbot**]( https://github.com/biobrad/tormesbot/wiki/Tormesbot), a tool to assist other microbiologists who are not computer savvy in manipulating the metadata and parsing arguments to a HPC environment.
+- In this issue - https://github.com/nmquijada/tormes/issues/16 - [**@biobrad**](https://github.com/biobrad) summarizes some of the errors he has run through and shares instructions on how to solve them.  
+- Additionally, [**@biobrad**](https://github.com/biobrad) has developed [**Tormesbot**]( https://github.com/biobrad/tormesbot/wiki/Tormesbot), a tool to assist other microbiologists who are not computer savvy in manipulating the metadata and parsing arguments to a HPC environment.
 
 
 <br>
