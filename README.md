@@ -1,5 +1,7 @@
 [![Anaconda-Server Badge](https://anaconda.org/nmquijada/tormes/badges/version.svg)](https://anaconda.org/nmquijada/tormes)  
-[![Anaconda-Server Badge](https://anaconda.org/nmquijada/tormes/badges/latest_release_date.svg)](https://anaconda.org/nmquijada/tormes)
+[![Anaconda-Server Badge](https://anaconda.org/nmquijada/tormes/badges/latest_release_date.svg)](https://anaconda.org/nmquijada/tormes)  
+[![Anaconda-Server Badge](https://anaconda.org/nmquijada/tormes/badges/latest_release_relative_date.svg)](https://anaconda.org/nmquijada/tormes)
+
 <br>
 
 # TORMES
