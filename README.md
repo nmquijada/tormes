@@ -1,16 +1,11 @@
 [![Anaconda-Server Badge](https://anaconda.org/nmquijada/tormes/badges/version.svg)](https://anaconda.org/nmquijada/tormes)  
 [![Anaconda-Server Badge](https://anaconda.org/nmquijada/tormes/badges/latest_release_date.svg)](https://anaconda.org/nmquijada/tormes)
-
 <br>
 
 # TORMES
 An automated pipeline for whole bacterial genome analysis directly from raw Illumina paired-end sequencing data.  
 
-## Update: 6 April 2020
-*Dear TORMES users. We are transitioning to TORMES v.1.1, which may result in issues while downloading TORMES now.  
-Transition will be done in the next hours. We will post it as soon as the process is finished.  
-Sorry for the inconveniences.*
-
+<br>
 
 ## Contents  
   * [What is TORMES?](#what-is-tormes)
