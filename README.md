@@ -4,7 +4,12 @@
 
 # TORMES
 An automated pipeline for whole bacterial genome analysis directly from raw Illumina paired-end sequencing data.  
-(*repository under development*)
+
+## Update: 6 April 2020
+*Dear TORMES users. We are transitioning to TORMES v.1.1, which may result in issues while downloading TORMES now.  
+Transition will be done in the next hours. We will post it as soon as the process is finished.  
+Sorry for the inconveniences.*
+
 
 ## Contents  
   * [What is TORMES?](#what-is-tormes)
