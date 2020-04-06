@@ -54,9 +54,9 @@ fi
 ## Antibiotic resistance genes summary file
 for i in $SAMPLE; do
 	for j in resfinder card argannot; do
-   	    awk -v OFS="$TAB" -F "$TAB" '(NR>1) && ($9 > 90)' $OUTWD/report_files/$i\_$j\.tab > $OUTWD/report_files/$i\_$j\_tmp.tab
-	    awk -v OFS="$TAB" -F "$TAB" '($10 > 90)' $OUTWD/report_files/$i\_$j\_tmp.tab > $OUTWD/report_files/$i\_$j\_min90.tab
-	    sed -i "1i#FILE${TAB}SEQUENCE${TAB}START${TAB}END${TAB}GENE${TAB}COVERAGE${TAB}COVERAGE_MAP${TAB}GAPS${TAB}%COVERAGE${TAB}%IDENTITY${TAB}DATABASE${TAB}ACCESSION${TAB}PRODUCT" $OUTWD/report_files/$i\_$j\_min90.tab
+   	  awk -v OFS="$TAB" -F "$TAB" '(NR>1) && ($10 > 90)' $OUTWD/report_files/$i\_$j\.tab > $OUTWD/report_files/$i\_$j\_tmp.tab
+	    awk -v OFS="$TAB" -F "$TAB" '($11 > 90)' $OUTWD/report_files/$i\_$j\_tmp.tab > $OUTWD/report_files/$i\_$j\_min90.tab
+	    sed -i "1i#FILE${TAB}SEQUENCE${TAB}START${TAB}END${TAB}STRAND${TAB}GENE${TAB}COVERAGE${TAB}COVERAGE_MAP${TAB}GAPS${TAB}%COVERAGE${TAB}%IDENTITY${TAB}DATABASE${TAB}ACCESSION${TAB}PRODUCT${TAB}RESISTANCE" $OUTWD/report_files/$i\_$j\_min90.tab
 	    rm -f $OUTWD/report_files/$i\_$j\_tmp.tab
 	done
 done
@@ -65,7 +65,7 @@ for j in resfinder card argannot; do
 done
 for i in $SAMPLE; do
 	for j in resfinder card argannot; do
-       	    sed -i "s/$i\_$j\_min90.tab/$i/" $OUTWD/report_files/$j\_summary.tab
+       sed -i "s/$i\_$j\_min90.tab/$i/" $OUTWD/report_files/$j\_summary.tab
 	    sed -i "s/.*report_files\///" $OUTWD/report_files/$j\_summary.tab
 	    #sed -i "s/.*$i/$i/" $OUTWD/report_files/$j\_summary.tab
 	    #rm -f $OUTWD/report_files/$i\_$j\_min90.tab
@@ -594,8 +594,8 @@ EOF
 fi
 cat <<EOF >> $OUTWD/report_files/tormes_report.Rmd
 ## Antibiotic resistance {#resistance}
-The search of antibiotic resistance genes was performed by screening of the draft genome against Resfinder ([E. Zankari et al., 2012](https://www.ncbi.nlm.nih.gov/pubmed/22782487)), CARD ([A.G. McArthur et al., 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3697360/)) and ARG-ANNOT ([S.K. Gupta et al., 2014](https://www.ncbi.nlm.nih.gov/pubmed/24145532)) databases by using [Abricate](https://github.com/tseemann/abricate).
-Any hit with coverage and/or identity below 90% was removed. If you would like to inspect hits with coverage and/or identity below 90%, please gor to the corresponing TORMES output directory.
+The search of antibiotic resistance genes was performed by screening the genome against Resfinder ([E. Zankari et al., 2012](https://www.ncbi.nlm.nih.gov/pubmed/22782487)), CARD ([A.G. McArthur et al., 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3697360/)) and ARG-ANNOT ([S.K. Gupta et al., 2014](https://www.ncbi.nlm.nih.gov/pubmed/24145532)) databases by using [Abricate](https://github.com/tseemann/abricate).
+Any hit with coverage and/or identity below 90% was removed. If you would like to inspect hits with coverage and/or identity below 90%, please go to the corresponing TORMES output directory.
 
 <br>
 
@@ -610,6 +610,7 @@ Field | Description
 **Identity** | Proportion (%) of exact nucleotide matches
 **Accession** | Accesion number of the antibiotic resistance gene
 **Product** | Antibiotic resistance gene product
+**Resistance** | Antibiotic that the gene confers resistance to
 
 <br>
 
@@ -622,8 +623,9 @@ cat<<EOF >> $OUTWD/report_files/tormes_report.Rmd
 \`\`\`{r, echo=FALSE}
 ABresfinder=read.table("${i}_resfinder.tab", header = T, sep = "\t", dec = ".", quote = "")
 ABresfinder=as.data.frame(ABresfinder)
-Resfdata=cbind(ABresfinder[,2:5], ABresfinder[,8:10], ABresfinder[,12:13])
-colnames(Resfdata)=c("Contig", "Start", "End", "Gene", "Gaps", "Coverage", "Identity", "Accession", "Product")
+#Resfdata=cbind(ABresfinder[,2:5], ABresfinder[,8:10], ABresfinder[,12:13])
+Resfdata=cbind(ABresfinder[,2:4], ABresfinder[,6], ABresfinder[,9:11], ABresfinder[,13:15])
+colnames(Resfdata)=c("Contig", "Start", "End", "Gene", "Gaps", "Coverage", "Identity", "Accession", "Product", "Resistance")
 ABresfinder = Resfdata[Resfdata\$Identity>90,]
 ABresfinder = ABresfinder[ABresfinder\$Coverage>90,]
 ABresfinder = ABresfinder[order(ABresfinder\$Gene),]
@@ -639,8 +641,9 @@ kable(ABresfinder, results='asis', align="c")
 \`\`\`{r, echo=FALSE}
 ABcard=read.table("${i}_card.tab", header = T, sep = "\t", dec = ".", quote = "")
 ABcard=as.data.frame(ABcard)
-carddata=cbind(ABcard[,2:5], ABcard[,8:10], ABcard[,12:13])
-colnames(carddata)=c("Contig", "Start", "End", "Gene", "Gaps", "Coverage", "Identity", "Accession", "Product")
+#carddata=cbind(ABcard[,2:5], ABcard[,8:10], ABcard[,12:13])
+cardata=cbind(ABcard[,2:4], ABcard[,6], ABcard[,9:11], ABcard[,13:15])
+colnames(carddata)=c("Contig", "Start", "End", "Gene", "Gaps", "Coverage", "Identity", "Accession", "Product", "Resistance")
 ABcard = carddata[carddata\$Identity>90,]
 ABcard = ABcard[ABcard\$Coverage>90,]
 ABcard = ABcard[order(ABcard\$Gene),]
@@ -656,8 +659,9 @@ kable(ABcard, results='asis', align="c")
 \`\`\`{r, echo=FALSE}
 ABargannot=read.table("${i}_argannot.tab", header = T, sep = "\t", dec = ".", quote = "")
 ABargannot=as.data.frame(ABargannot)
-argannotdata=cbind(ABargannot[,2:5], ABargannot[,8:10], ABargannot[,12:13])
-colnames(argannotdata)=c("Contig", "Start", "End", "Gene", "Gaps", "Coverage", "Identity", "Accession", "Product")
+#argannotdata=cbind(ABargannot[,2:5], ABargannot[,8:10], ABargannot[,12:13])
+argannotdata=cbind(ABargannot[,2:4], ABargannot[,6], ABargannot[,9:11], ABargannot[,13:15])
+colnames(argannotdata)=c("Contig", "Start", "End", "Gene", "Gaps", "Coverage", "Identity", "Accession", "Product", "Resistance")
 ABargannot = argannotdata[argannotdata\$Identity>90,]
 ABargannot = ABargannot[ABargannot\$Coverage>90,]
 ABargannot = ABargannot[order(ABargannot\$Gene),]
@@ -775,7 +779,7 @@ fi
 
 cat<<EOF >> $OUTWD/report_files/tormes_report.Rmd
 ## Virulence genes {#virulence}
-The search of virulence genes was performed by screening of the draft genome against Virulence Factors Data Base (VFDB, [L. Chen et al., 2005](https://www.ncbi.nlm.nih.gov/pubmed/15608208)) by using [Abricate](https://github.com/tseemann/abricate). Any hit with coverage and/or identity below 90% was removed. To see description of each field, click [here](#resistance).
+The search of virulence genes was performed by screening the genome against Virulence Factors Data Base (VFDB, [L. Chen et al., 2005](https://www.ncbi.nlm.nih.gov/pubmed/15608208)) by using [Abricate](https://github.com/tseemann/abricate). Any hit with coverage and/or identity below 90% was removed. To see description of each field, click [here](#resistance).
 
 <br>
 
@@ -787,7 +791,8 @@ cat<<EOF >> $OUTWD/report_files/tormes_report.Rmd
 \`\`\`{r, echo=FALSE, message=FALSE, error=TRUE}
 vfdb=read.table("${i}_vfdb.tab", header = T, sep = "\t", dec = ".", quote = "")
 vfdb=as.data.frame(vfdb)
-vfdbdata=cbind(vfdb[,2:5], vfdb[,8:10], vfdb[,12:13])
+#vfdbdata=cbind(vfdb[,2:5], vfdb[,8:10], vfdb[,12:13])
+vfdbdata=cbind(vfdb[,2:4], vfdb[,6], vfdb[,9:11], vfdb[,13:14])
 colnames(vfdbdata)=c("Contig", "Start", "End", "Gene", "Gaps", "Coverage", "Identity", "Accession", "Product")
 vfdb = vfdbdata[vfdbdata\$Identity>90,]
 vfdb = vfdb[vfdb\$Coverage>90,]
