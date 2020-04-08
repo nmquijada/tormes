@@ -7,6 +7,11 @@ An automated pipeline for whole bacterial genome analysis directly from raw Illu
 
 <br>
 
+### Update 08-04-2020
+*We are transitioning to TORMES version 1.1, which includes novel features in the pipeline. Further instructions will be provided in the following hours.*
+
+<br>
+
 ## Contents  
   * [What is TORMES?](#what-is-tormes)
   * [Installation](#installation)
