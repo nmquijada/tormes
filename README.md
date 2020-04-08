@@ -3,8 +3,12 @@
 <br>
 
 # TORMES
-An automated pipeline for whole bacterial genome analysis from raw Illumina paired-end sequencing data.  
-We have just launched TORMES *version 1.1*, that fixes problems of the former version and that allows to include already assembled genomes in the analysis. This genomes can be analyzed by TORMES alone or in combination with raw sequencing data.   
+An automated pipeline for whole bacterial genome analysis of genomes and/or raw Illumina paired-end sequencing data, regardless the number, origin or species.  
+
+### Update: 08-April-2020: New version released!  
+We have just launched TORMES *version 1.1*, that fixes problems from the former version and that allows to include already assembled genomes in the analysis. This genomes can be analyzed by TORMES alone or in combination with raw sequencing data.   
+The inclusion of genomes in the pipeline can broaden your projects, by for instance including genomes that were sequenced from a technology different to Illumina and/or those that can be downloaded for your favorite repository (CBI, PATRIC, etc.).  
+Additionally, you can couple TORMES with your metagenomic analysis, for a downstream analysis of the Metagenomic Associated Genomes (MAGs).
 
 <br>
 
