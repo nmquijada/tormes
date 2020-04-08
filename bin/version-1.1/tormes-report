@@ -102,11 +102,17 @@ rm -f $OUTWD/report_files/*min90.tab
 ##Other formatting
 for i in $SAMPLE; do
         for j in resfinder card argannot vfdb; do
-	    sed -i 's/#FILE/FILE/g' $OUTWD/report_files/$i\_$j.tab
+	    			sed -i 's/#FILE/FILE/g' $OUTWD/report_files/$i\_$j.tab
 #	    sed -i 's/'\''//g' $OUTWD/report_files/$i\_$j.tab
             sed -i 's/_length/ length/g' $OUTWD/report_files/$i\_$j.tab
             sed -i 's/_cov/ cov/g' $OUTWD/report_files/$i\_$j.tab
 	done
+done
+
+for i in $SAMPLE; do
+    for j in resfinder card argannot; do
+			sed -i "s/;/, /g" $OUTWD/report_files/${i}_${j}.tab
+		done
 done
 
 if [ "$GENERA" == 'Escherichia' ]; then
@@ -142,6 +148,7 @@ library(knitr)
 library(plotly)
 library(RColorBrewer)
 library(reshape2)
+library(treeio)
 #knitr::opts_chunk\$set(out.width="1200px", dpi=120, fig.align = "center")
 knitr::opts_chunk\$set(dpi=120, fig.align = "center")
 \`\`\`
@@ -222,6 +229,8 @@ colnames(seqdata)=c("Sample", "Reads", "AvgReadLen", "Contigs", "GenomeLength", 
 kable(seqdata, results='asis', align = "c")
 \`\`\`
 
+<br>
+
 #### Select the parameter {.tabset .tabset-fade .tabset-pills}
 ##### Number of reads
 \`\`\`{r, echo=FALSE}
@@ -233,7 +242,7 @@ a <- list(title = "Number of reads", showticklabels = TRUE, exponentformat = "E"
 plot_ly(x=x, y=y, type = "bar") %>%
 layout(yaxis = a)
 \`\`\`
-Average number of reads per sample = **\`r mean(seqdata\$Reads)\`**
+Average number of reads per sample = **\`r mean(seqdata\$Reads, na.rm=TRUE)\`**
 
 ##### Average read length
 \`\`\`{r, echo=FALSE}
@@ -244,7 +253,7 @@ a <- list(title = "Average read length", showticklabels = TRUE, exponentformat =
 plot_ly(x=x, y=y, type = "bar") %>%
 layout(yaxis = a)
 \`\`\`
-Average read length per sample = **\`r mean(seqdata\$AvgReadLen)\` bp**
+Average read length per sample = **\`r mean(seqdata\$AvgReadLen, na.rm=TRUE)\` bp**
 
 ##### Number of contigs
 \`\`\`{r, echo=FALSE}
@@ -257,7 +266,7 @@ layout(yaxis = a)
 \`\`\`
 Average number of contigs per sample = **\`r mean(seqdata\$Contigs)\`**
 
-##### Draft genome length
+##### Genome length
 \`\`\`{r, echo=FALSE}
 #ggplot(data = seqdata, aes(x=Sample, y=GenomeLength))+geom_bar(stat="identity", fill="steelblue") + geom_hline(yintercept = mean(seqdata\$GenomeLength), color="red") + ylab ("Draft genome length") + theme(axis.text.x=element_text(angle = 90, vjust = 0.5, hjust = 1, face="bold"))
 x=seqdata\$Sample
@@ -266,7 +275,7 @@ a <- list(title = "Genome length", showticklabels = TRUE, exponentformat = "E")
 plot_ly(x=x, y=y, type = "bar") %>%
 layout(yaxis = a)
 \`\`\`
-Average draft genome length per sample = **\`r mean(seqdata\$GenomeLength)\` bp**
+Average genome length per sample = **\`r mean(seqdata\$GenomeLength)\` bp**
 
 ##### Largest contig length
 \`\`\`{r, echo=FALSE}
@@ -313,7 +322,7 @@ a <- list(title = "Sequencing depth (X)", showticklabels = TRUE, exponentformat 
 plot_ly(x=x, y=y, type = "bar") %>%
 layout(yaxis = a)
 \`\`\`
-Average sequencing depth = **\`r mean(seqdata\$Depth)\`X**
+Average sequencing depth = **\`r mean(seqdata\$Depth, na.rm=TRUE)\`X**
 
 
 
@@ -491,7 +500,7 @@ EOF
 cat <<EOF >> $OUTWD/report_files/tormes_report.Rmd
 #### Pangenome tree based on presence/absence of accesory genes representation {.tabset .tabset-fade .tabset-pills}
 ##### Rectangular (phylogram)
-\`\`\`{r, echo=FALSE, message=FALSE}
+\`\`\`{r, echo=FALSE, message=FALSE, warning=FALSE}
 tree=read.newick("accessory_binary_genes.fa.newick")
 treelim=20*mean(tree\$edge.length)
 ggtree(tree) + geom_tiplab(size=3) + xlim_tree(treelim)
@@ -605,7 +614,7 @@ Field | Description
 **Start** | Start position of the gene within the contig
 **End** | End position of the gene within the contig
 **Gene** | Antibiotic resistance gene
-**Gaps** | Gaps in subject (draft genome) and query (antibiotic resistance genes)
+**Gaps** | Gaps in subject (genome) and query (antibiotic resistance gene)
 **Coverage** | Proportion (%) of the gene covered
 **Identity** | Proportion (%) of exact nucleotide matches
 **Accession** | Accesion number of the antibiotic resistance gene
@@ -623,7 +632,6 @@ cat<<EOF >> $OUTWD/report_files/tormes_report.Rmd
 \`\`\`{r, echo=FALSE}
 ABresfinder=read.table("${i}_resfinder.tab", header = T, sep = "\t", dec = ".", quote = "")
 ABresfinder=as.data.frame(ABresfinder)
-#Resfdata=cbind(ABresfinder[,2:5], ABresfinder[,8:10], ABresfinder[,12:13])
 Resfdata=cbind(ABresfinder[,2:4], ABresfinder[,6], ABresfinder[,9:11], ABresfinder[,13:15])
 colnames(Resfdata)=c("Contig", "Start", "End", "Gene", "Gaps", "Coverage", "Identity", "Accession", "Product", "Resistance")
 ABresfinder = Resfdata[Resfdata\$Identity>90,]
@@ -641,8 +649,7 @@ kable(ABresfinder, results='asis', align="c")
 \`\`\`{r, echo=FALSE}
 ABcard=read.table("${i}_card.tab", header = T, sep = "\t", dec = ".", quote = "")
 ABcard=as.data.frame(ABcard)
-#carddata=cbind(ABcard[,2:5], ABcard[,8:10], ABcard[,12:13])
-cardata=cbind(ABcard[,2:4], ABcard[,6], ABcard[,9:11], ABcard[,13:15])
+carddata=cbind(ABcard[,2:4], ABcard[,6], ABcard[,9:11], ABcard[,13:15])
 colnames(carddata)=c("Contig", "Start", "End", "Gene", "Gaps", "Coverage", "Identity", "Accession", "Product", "Resistance")
 ABcard = carddata[carddata\$Identity>90,]
 ABcard = ABcard[ABcard\$Coverage>90,]
@@ -659,7 +666,6 @@ kable(ABcard, results='asis', align="c")
 \`\`\`{r, echo=FALSE}
 ABargannot=read.table("${i}_argannot.tab", header = T, sep = "\t", dec = ".", quote = "")
 ABargannot=as.data.frame(ABargannot)
-#argannotdata=cbind(ABargannot[,2:5], ABargannot[,8:10], ABargannot[,12:13])
 argannotdata=cbind(ABargannot[,2:4], ABargannot[,6], ABargannot[,9:11], ABargannot[,13:15])
 colnames(argannotdata)=c("Contig", "Start", "End", "Gene", "Gaps", "Coverage", "Identity", "Accession", "Product", "Resistance")
 ABargannot = argannotdata[argannotdata\$Identity>90,]
@@ -696,7 +702,7 @@ ResfinderSummary=ResfinderSummary[,-2]
 Resfinderdatos=as.matrix(ResfinderSummary[,-1])
 x=colnames(ResfinderSummary)[-1]
 y=ResfinderSummary\$FILE
-plot_ly(x=x, y=y, z=Resfinderdatos, type = "heatmap", colors=colorRamp(c("gainsboro", "chartreuse3", "forestgreen")), showscale=F) %>% layout(xaxis=list(type="category"), yaxis = list(autorange="reversed"))
+plot_ly(x=x, y=y, z=Resfinderdatos, type = "heatmap", colors=colorRamp(c("gainsboro", "olivedrab", "forestgreen")), showscale=F) %>% layout(xaxis=list(type="category"), yaxis = list(autorange="reversed"))
 \`\`\`
 
 ###### CARD
@@ -709,7 +715,7 @@ CARDSummary=CARDSummary[,-2]
 CARDdatos=as.matrix(CARDSummary[,-1])
 x=colnames(CARDSummary)[-1]
 y=CARDSummary\$FILE
-plot_ly(x=x, y=y, z=CARDdatos, type = "heatmap", colors=colorRamp(c("gainsboro", "chartreuse3", "firebrick3")), showscale=F) %>% layout(xaxis=list(type="category"), yaxis = list(autorange="reversed"))
+plot_ly(x=x, y=y, z=CARDdatos, type = "heatmap", colors=colorRamp(c("gainsboro", "firebrick1", "firebrick3")), showscale=F) %>% layout(xaxis=list(type="category"), yaxis = list(autorange="reversed"))
 \`\`\`
 
 ###### ARG-ANNOT
@@ -722,7 +728,7 @@ ARGSummary=ARGSummary[,-2]
 ARGdatos=as.matrix(ARGSummary[,-1])
 x=colnames(ARGSummary)[-1]
 y=ARGSummary\$FILE
-plot_ly(x=x, y=y, z=ARGdatos, type = "heatmap", colors=colorRamp(c("gainsboro", "chartreuse3", "dodgerblue3")), showscale=F) %>% layout(xaxis=list(type="category"), yaxis = list(autorange="reversed"))
+plot_ly(x=x, y=y, z=ARGdatos, type = "heatmap", colors=colorRamp(c("gainsboro", "dodgerblue1", "dodgerblue3")), showscale=F) %>% layout(xaxis=list(type="category"), yaxis = list(autorange="reversed"))
 \`\`\`
 
 #
@@ -791,7 +797,6 @@ cat<<EOF >> $OUTWD/report_files/tormes_report.Rmd
 \`\`\`{r, echo=FALSE, message=FALSE, error=TRUE}
 vfdb=read.table("${i}_vfdb.tab", header = T, sep = "\t", dec = ".", quote = "")
 vfdb=as.data.frame(vfdb)
-#vfdbdata=cbind(vfdb[,2:5], vfdb[,8:10], vfdb[,12:13])
 vfdbdata=cbind(vfdb[,2:4], vfdb[,6], vfdb[,9:11], vfdb[,13:14])
 colnames(vfdbdata)=c("Contig", "Start", "End", "Gene", "Gaps", "Coverage", "Identity", "Accession", "Product")
 vfdb = vfdbdata[vfdbdata\$Identity>90,]
@@ -832,7 +837,7 @@ cat<<EOF >> $OUTWD/report_files/tormes_report.Rmd
 \`\`\`{r, echo=FALSE, message=FALSE, error=TRUE}
 plasmids=read.table("${i}_plasmids.tab", header = T, sep = "\t", dec = ".", quote = "")
 plasmids=as.data.frame(plasmids)
-plasmidsdata=cbind(plasmids[,2:5], plasmids[,8:10], plasmids[,12:13])
+plasmidsdata=cbind(plasmids[,2:4], plasmids[,6], plasmids[,9:11], plasmids[,13:14])
 colnames(plasmidsdata)=c("Contig", "Start", "End", "Gene", "Gaps", "Coverage", "Identity", "Accession", "Product")
 plasmids = plasmidsdata[plasmidsdata\$Identity>90,]
 plasmids = plasmids[plasmids\$Coverage>90,]
@@ -895,6 +900,7 @@ Please, also cite the software and databases that are included in TORMES pipelin
 	+ RColorBrewer, [E. Neuwirth and R.C. Brewer, 2014](https://cran.r-project.org/web/packages/RColorBrewer/index.html)
 	+ reshape2, [H. Wickham, 2007](https://cran.r-project.org/web/packages/reshape2/index.html)
 	+ rmarkdown, [J.J. Allaire, 2015](https://cran.r-project.org/web/packages/rmarkdown/index.html)
+	+ treeio, [L-G. Wang et al., 2019](https://academic.oup.com/mbe/article-abstract/37/2/599/5601621?redirectedFrom=fulltext)
 * Roary, [A.J. Page et al., 2015](https://www.ncbi.nlm.nih.gov/pubmed/26198102)
 * roary2svg, [T. Seemann](https://github.com/sanger-pathogens/Roary/blob/master/contrib/roary2svg/roary2svg.pl)
 * ResFinder Database, [E. Zankari et al., 2012](https://www.ncbi.nlm.nih.gov/pubmed/22782487)
