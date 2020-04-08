@@ -17,9 +17,14 @@ fi
 echo -e "\n[TORMES]: Installing missing R packages\n"
 
 #In some shared-machines the R_LIBS variable is set by the administrator and drives to errors
-#export R_LIBS=$TORMESDIR/../lib/R/library/
+#In R, check the .libPaths() output
+#This should solve the issue
+export R_LIBS=$TORMESDIR/../lib/R/library/
+# For some reason, in some build-up machines with R and R variables already stablished, BiocManager installs v=3.9 through conda (out of date)
 Rscript -e 'library(BiocManager); BiocManager::install(version = "3.10", ask = FALSE, lib.loc="$TORMESDIR/../lib/R/library/")'
 Rscript -e 'library(BiocManager); BiocManager::install("ggtree", ask = FALSE, lib.loc="$TORMESDIR/../lib/R/library/")'
+Rscript -e 'library(BiocManager); BiocManager::install("treeio", ask = FALSE, lib.loc="$TORMESDIR/../lib/R/library/")'
+
 
 echo -e "\n[TORMES]: Installing missing CGE modules\n"
 mkdir -p $TORMESDIR/../CGE-modules/pointfinder
@@ -47,7 +52,6 @@ rm $TORMESDIR/../db/minikraken-DB/minikraken_20171019_8GB.tgz
 
 echo -e "\n[TORMES]: Setting up config_file.txt"
 mkdir -p $TORMESDIR/../files/
-#touch $TORMESDIR/../files/config_file.txt
 cat<<EOF>$TORMESDIR/../files/config_file.txt
 #FILES${TAB}LOCATION
 ABRICATE${TAB}$(which abricate)
@@ -80,5 +84,5 @@ SPADES${TAB}$(which spades.py)
 TRIMMOMATIC${TAB}$(which trimmomatic)
 EOF
 
+echo -e "\n[TORMES]: Visit https://github.com/nmquijada/tormes for further information\n"
 echo -e "\n[TORMES]: TORMES is installed and ready to use. Enjoy!\n"
-echo -e "\n[TORMES]: Please go to https://github.com/nmquijada/tormes for further information\n"
