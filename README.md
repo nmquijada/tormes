@@ -67,7 +67,7 @@ We would like TORMES to be regularly updated with the most novel tools and datab
 
 ## Installation
 
-TORMES is a pipeline that requries a lot of dependenices to work. It has been devised to be used as a conda environment. For installing TORMES an all its dependencies run (all of them will be installed with the conda environment):
+TORMES is a pipeline that requries a lot of dependenices to work. It has been devised to be used as a conda environment. For installing TORMES an all its dependencies run:
 
 ```
 wget https://anaconda.org/nmquijada/tormes-1.1/2020.04.08.105015/download/tormes-1.1.yml
@@ -93,7 +93,7 @@ This step will install additional dependencies not available in conda, including
 <br>
 
 ### Required dependencies
-TORMES is a pipeline and it requires several dependencies to work:
+TORMES is a pipeline and it requires several dependencies to work (all of them will be installed with the conda environment):
   * [ABRicate](https://github.com/tseemann/abricate)
   * [FastTree](http://meta.microbesonline.org/fasttree/)
   * [GNUParallel](https://www.gnu.org/software/parallel/)
