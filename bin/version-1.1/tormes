@@ -942,7 +942,6 @@ sed -i "1iISOLATE${TAB}READS${TAB}AvgReadLen${TAB}CONTIGS${TAB}GenomeLength${TAB
 
 fi
 
-# MoD 01.04
 # Importing genomes from metadata if existing
 GENOMETADATA=$OUTWD/genomes.tmp
 GENOMES="$(<$OUTWD/genomes-list.tmp)"
@@ -974,11 +973,19 @@ SAMPLE="$(<$OUTWD/list.tmp)"
 #Imported genome stats, taxonomic classification and "sequening" report
 if [ -s "$GENOMETADATA" ]; then
 
+if [ ! -d "$OUTWD/genome_stats" ]; then
+  mkdir $OUTWD/genome_stats
+fi
+
   for i in $GENOMES; do
   	$QUAST $OUTWD/genomes/${i}.fasta -o $OUTWD/genome_stats/${i}_genome_stats -t $CPUS --min-contig 200 --no-icarus --silent --no-sv
     echo -e "${TAB}${TAB}- Number of contigs in genome ${i}: \c" >> $OUTWD/tormes.log
     grep -c ">" $OUTWD/genomes/${i}.fasta >> $OUTWD/tormes.log
   done
+
+if [ ! -d "$OUTWD/species_identification" ]; then
+  mkdir $OUTWD/species_identification
+fi
 
   for i in $GENOMES; do
           $KRAKEN --threads $CPUS --only-classified-output --preload --db $KRAKENDB $OUTWD/genomes/${i}.fasta | $KRAKENREPORT --db $KRAKENDB > $OUTWD/species_identification/${i}_identification.txt
