@@ -178,7 +178,7 @@ tormes --metadata salmonella_metadata.txt --output Salmonella_TORMES_2018 --refe
 ### Obligatory options
 A metadata text file is needed for TORMES to work by using the `-m/--metadata` option. This file will include all the information regarding the sample and requires an specific organization:
  - Columns should be tab separated.
- - First column must me called `Samples` and harbor samples names (avoid special character and names composed only by numberss).
+ - First column must me called `Samples` and harbor samples names (avoid special characters and names composed only by numbers).
  - Second column must be called `Read1` and harbor the path to the R1 (forward) reads (either fastq or fastq.gz).
  - Third column must be called `Read2` and harbor the path to the R2 (reverse) reads (either fastq or fastq.gz).
  - Fourth (and so on) columns are descriptive. The information included here is not needed for TORMES to work but will be included in the interactive report. You can add as many description columns as needed (including information such as isolation date or source, different codification of each sample, *etc*.).
@@ -187,11 +187,11 @@ A metadata text file is needed for TORMES to work by using the `-m/--metadata` o
 
 **Since TORMES version 1.1, the inclusion of already assembled genomes in the analysis is allowed.** This genomes can be analyzed alone or in combination with raw sequencing data.
 If you would like to include genomes in the analysis, the same metadata file has to be used by respecting the following rules:  
-        - Columns must be tab separated
-        - First column must me called `Samples` and harbor samples names (avoid special characters and names composed only by numbers)
-        - Second column must be called `Read1` and has to contain the word "GENOME" (beware the capital letters!)
-        - Third column must be called `Read2` and harbor the path to the genome (in FASTA format)
-        - Fourth (and so on) columns are descriptive. They are not needed for the program but the information will appear in the report
+ - Columns must be tab separated
+ - First column must me called `Samples` and harbor samples names (avoid special characters and names composed only by numbers)
+ - Second column must be called `Read1` and has to contain the word "GENOME" (beware the capital letters!)
+ - Third column must be called `Read2` and harbor the path to the genome (in FASTA format)
+ - Fourth (and so on) columns are descriptive. They are not needed for the program but the information will appear in the report
           Add as much columns as you want.
 
 <br>
