@@ -188,7 +188,7 @@ A metadata text file is needed for TORMES to work by using the `-m/--metadata` o
 **Since TORMES version 1.1, the inclusion of already assembled genomes in the analysis is allowed.** This genomes can be analyzed alone or in combination with raw sequencing data.
 If you would like to include genomes in the analysis, the same metadata file has to be used by respecting the following rules:
         - Columns must be tab separated
-        - First column must me called `Samples` and harbor samples names (avoid special characters)
+        - First column must me called `Samples` and harbor samples names (avoid special characters and names composed only by numbers)
         - Second column must be called `Read1` and has to contain the word "GENOME" (beware the capital letters!)
         - Third column must be called `Read2` and harbor the path to the genome (in FASTA format)
         - Fourth (and so on) columns are descriptive. They are not needed for the program but the information will appear in the report
