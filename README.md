@@ -304,5 +304,5 @@ TORMES is a free software, licensed under [GPLv3](https://github.com/nmquijada/t
 <br>
 
 ## Versions history
-- **v.1.1** (April 2020, *current*): solved issues from v.1.0. New feature: Enables the option to already assembled genomes into the analysis, alone or in combination with raw sequencing data.
+- **v.1.1** (April 2020, *current*): solved issues from v.1.0. New feature: Enables the option to include already assembled genomes into the analysis, alone or in combination with raw sequencing data.
 - **v.1.0** (April 2019): original version of the TORMES pipeline.
