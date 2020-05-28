@@ -1960,6 +1960,7 @@ mcr-2	Colistin
 mcr-3	Colistin
 mcr-4	Colistin
 mcr-5	Colistin
+mcr-6 Colistin
 mecA	Beta-lactam
 mecC	Beta-lactam
 mef(A)	Macrolide
