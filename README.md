@@ -12,7 +12,8 @@ Additionally, you can couple TORMES with your metagenomic analysis, for a downst
 
 <br>
 
-*All the information contained in this README refers to **TORMES version 1.1***
+*All the information contained in this README refers to **TORMES version 1.1***  
+*For further information or additional uses you can also visit the [TORMES wiki](https://github.com/nmquijada/tormes/wiki)*
 
 <br>
 
