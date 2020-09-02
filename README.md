@@ -142,7 +142,7 @@ OBLIGATORY OPTIONS:
 
 OTHER OPTIONS:
         -a/--adapter    Path to the adapters file
-                        (default=""PATH/TO/TORMES/files/adapters.fasta")
+                        (default="PATH/TO/TORMES/files/adapters.fasta")
         --assembler     Select the assembler to use. Options available: 'spades', 'megahit'
                         (default='spades')
         -c/--config     Path to the configuration file with the location of all dependencies
