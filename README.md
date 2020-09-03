@@ -72,7 +72,7 @@ We would like TORMES to be regularly updated with the most novel tools and datab
 
 ## Installation
 
-TORMES is a pipeline that requries a lot of dependenices to work. It has been devised to be used as a conda environment. For installing TORMES an all its dependencies run:
+TORMES is a pipeline that requires a lot of dependencies to work. It has been devised to be used as a conda environment. For installing TORMES an all its dependencies run:
 
 ```
 wget https://anaconda.org/nmquijada/tormes-1.1/2020.04.08.105015/download/tormes-1.1.yml
