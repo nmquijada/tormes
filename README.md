@@ -104,7 +104,7 @@ This script will download the [MiniKraken2_v1_8GB](https://ccb.jhu.edu/software/
 <br>
 
 If you were already using a previous version of TORMES, sometimes conda runs into issues when installing more than one version of TORMES due to the differential version of the included dependencies (each new version of TORMES includes the current version of the dependencies).  
-If you run into such problems, just remove the premios TORMES environment and "clean" the system by doing:
+If you run into such problems, just remove the previous TORMES environment and "clean up" the system by doing:
 ```
 conda env remove -n tormes-1.1
 conda clean --all
