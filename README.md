@@ -237,8 +237,9 @@ TORMES stores every file generated during the analysis is different directories 
 - **mlst**: results of Multi-Locus Sequence Typing (MLST) by using [mlst](https://github.com/tseemann/mlst).
 - **pangenome**: results of pangenome comparison between the samples by using [Roary](https://sanger-pathogens.github.io/Roary/).
 - **report_files.tgz**: files necessary for the generation of the interactive web-like report. See further instructions [here](https://github.com/nmquijada/tormes/wiki/The-tormes-report-files).
+- **rRNA-genes**: contains three different directories for each of the rRNA genes, 5S, 16S and 23S, that were extracted from each genome by using [Barrnap](https://github.com/tseemann/barrnap). Each directory contains one fasta file per sample harboring the respective rRNA gense sequence(s).
 - **sequencing_assembly_report.txt**: tabulated file including information of the sequencing (number of reads, average read length, sequencing depth), the assembly (number of contigs, genome length, average contig length, N50, GC content) and consensus taxonomic assignment.
-- **taxonomic_identification**: 
+- **taxonomic_identification**: contains the taxonomic identification results for each sample, either based on *k*-mers by using [Kraken2](https://github.com/DerrickWood/kraken2) or the 16S rRNA gene by using the [RDP Classifier](https://github.com/rdpstaff/RDPTools).
 - **tormes.log**: log file of TORMES analysis progress.
 - **tormes_report.html**: web-interactive report generated automatically after WGS analysis that summarizes the results. Can be open in any browser, shared and analyzed in a simple way.
 - **virulence_genes**: results of the scrrening for virulence genes by using [Abricate](https://github.com/tseemann/abricate) against the [Virulence Factors Database](http://www.mgc.ac.cn/VFs/).
