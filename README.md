@@ -80,6 +80,7 @@ We would like TORMES to be regularly updated with the most novel tools and datab
 TORMES is a pipeline that requires a lot of dependencies to work. It has been devised to be used as a conda environment. For installing TORMES an all its dependencies run:
 
 ```
+conda update conda
 wget https://anaconda.org/nmquijada/tormes-1.2.0/2020.09.03.175041/download/tormes-1.2.0.yml
 conda env create -n tormes-1.2.0 --file tormes-1.2.0.yml
 ```
