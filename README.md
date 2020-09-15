@@ -1,6 +1,6 @@
-[![Anaconda-Server Badge](https://anaconda.org/nmquijada/tormes/badges/version.svg)](https://anaconda.org/nmquijada/tormes)  
-[![Anaconda-Server Badge](https://anaconda.org/nmquijada/tormes/badges/latest_release_date.svg)](https://anaconda.org/nmquijada/tormes)  
-[![Anaconda-Server Badge](https://anaconda.org/nmquijada/tormes/badges/installer/conda.svg)](https://conda.anaconda.org/nmquijada)  
+[![Anaconda-Server Badge](https://anaconda.org/nmquijada/tormes/badges/version.svg)](https://anaconda.org/nmquijada/tormes)
+[![Anaconda-Server Badge](https://anaconda.org/nmquijada/tormes/badges/latest_release_date.svg)](https://anaconda.org/nmquijada/tormes)
+[![Anaconda-Server Badge](https://anaconda.org/nmquijada/tormes/badges/installer/conda.svg)](https://conda.anaconda.org/nmquijada)
 <br>
 
 # TORMES
@@ -19,6 +19,7 @@ Additionally, you can couple TORMES with your metagenomic analysis, for a downst
 <br>
 
 *All the information contained in this README refers to **TORMES version 1.2.0***  
+Get track of the improvements in TORMES pipeline in the [Versions history](#versions-history) section.  
 For further information or additional uses you can also visit the [TORMES wiki](https://github.com/nmquijada/tormes/wiki).
 
 
