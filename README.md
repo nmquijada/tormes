@@ -13,12 +13,13 @@ Additionally, you can couple TORMES with your metagenomic analysis, for a downst
 
 <br>
 
-### UPDATE 2020-09-03: New TORMES version 1.2.0 released!
- The TORMES version 1.2.0 includes novel features regarding the taxonomic identification of your dataset. Kraken2 is now used instead of Kraken (that was used in former versions of TORMES), that increases the sensitivity and speed for the taxonomic identification based on *k*-mers. Additionally, rRNA genes will be extracted from the genomes and the 16S rRNA genes will be  used for taxonomic classification by using the RDP Classifier.
+### UPDATE 2020-10-07: New TORMES version 1.2.1 released!  
+*This version fixes bugs from version 1.2.0.*  
+The TORMES version 1.2.* includes novel features regarding the taxonomic identification of your dataset. Kraken2 is now used instead of Kraken (that was used in former versions of TORMES), that increases the sensitivity and speed for the taxonomic identification based on *k*-mers. Additionally, rRNA genes will be extracted from the genomes and the 16S rRNA genes will be  used for taxonomic classification by using the RDP Classifier.
 
 <br>
 
-*All the information contained in this README refers to **TORMES version 1.2.0***  
+*All the information contained in this README refers to **TORMES version 1.2.1***  
 Get track of the improvements in TORMES pipeline in the [Versions history](#versions-history) section.  
 For further information or additional uses you can also visit the [TORMES wiki](https://github.com/nmquijada/tormes/wiki).
 
@@ -81,15 +82,15 @@ We would like TORMES to be regularly updated with the most novel tools and datab
 TORMES is a pipeline that requires a lot of dependencies to work. It has been devised to be used as a conda environment. For installing TORMES an all its dependencies run:
 
 ```
-wget https://anaconda.org/nmquijada/tormes-1.2.0/2020.09.03.175041/download/tormes-1.2.0.yml
-conda env create -n tormes-1.2.0 --file tormes-1.2.0.yml
+wget https://anaconda.org/nmquijada/tormes-1.2.1/2020.10.07.080943/download/tormes-1.2.1.yml
+conda env create -n tormes-1.2.1 --file tormes-1.2.1.yml
 ```
 <br>
 
 To activate TORMES environment run:
 
 ```
-conda activate tormes-1.2.0
+conda activate tormes-1.2.1
 ```
 <br>
 
@@ -328,6 +329,6 @@ TORMES is a free software, licensed under [GPLv3](https://github.com/nmquijada/t
 <br>
 
 ## Versions history
-- **v.1.2.0** (September 2020, *current*): solved issues from v.1.1. New features: Kraken2 is now used instead of Kraken, increasing the sensitivity and speed for the taxonomic identification based on *k*-mers. Additionally, rRNA genes will be extracted from the genomes and the 16S rRNA genes will be  used for taxonomic classification by using the RDP Classifier.
-- **v.1.1** (April 2020): solved issues from v.1.0. New features: Enables the option to include already assembled genomes into the analysis, alone or in combination with raw sequencing data.
-- **v.1.0** (April 2019): original version of the TORMES pipeline.
+- **v.1.2.\*** (*current*): New features: Kraken2 is now used instead of Kraken, increasing the sensitivity and speed for the taxonomic identification based on *k*-mers. Additionally, rRNA genes will be extracted from the genomes and the 16S rRNA genes will be  used for taxonomic classification by using the RDP Classifier.
+- **v.1.1.\*** (April 2020): New features: Enables the option to include already assembled genomes into the analysis, alone or in combination with raw sequencing data. Script "*render_report.sh*" is automatically generated in the "report_files" directory for easy generate the report.
+- **v.1.0.\*** (April 2019): original version of the TORMES pipeline.
