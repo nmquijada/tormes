@@ -1,0 +1,105 @@
+#! /bin/bash
+
+VERSION="1.2.1"
+
+TORMES=$0
+while [ -h "$TORMES" ]; do # resolve $TORMES until the file is no longer a symlink
+  TORMESDIR="$( cd -P "$( dirname "$0" )" && pwd )"
+  TORMES="$(readlink "$TORMES")"
+  [[ $TORMES != /* ]] && TORMES="$TORMESDIR/$TORMES" # if $TORMES is a symlink, resolve it relative to the path where the symlink file was located
+done
+TORMESDIR="$( cd -P "$( dirname "$TORMES" )" && pwd )"
+TAB="$(printf '\t')"
+
+if [ -d "$TORMESDIR/../CGE-modules/" ]; then
+	echo -e "\nERROR: $TORMESDIR/../CGE-modules/ already exist! Please check \n"
+	exit 1
+fi
+
+cat << EOF
+
+[TORMES]: This is tormes-setup for TORMES version $VERSION\n"
+
+[TORMES]: Developed by Narciso M. Quijada
+
+[TORMES]: This script will download some software and databases and might take a while...
+EOF
+
+echo -e "\n[TORMES]: Installing missing R packages\n"
+
+#In some shared-machines the R_LIBS variable is set by the administrator and drives to errors
+#In R, check the .libPaths() output
+#This should solve the issue
+export R_LIBS=$TORMESDIR/../lib/R/library/
+# For some reason, in some build-up machines with R and R variables already stablished, BiocManager installs v=3.9 through conda (out of date)
+Rscript -e 'library(BiocManager); BiocManager::install(version = "3.10", ask = FALSE, lib.loc="$TORMESDIR/../lib/R/library/")'
+Rscript -e 'library(BiocManager); BiocManager::install("ggtree", ask = FALSE, lib.loc="$TORMESDIR/../lib/R/library/")'
+Rscript -e 'library(BiocManager); BiocManager::install("treeio", ask = FALSE, lib.loc="$TORMESDIR/../lib/R/library/")'
+
+
+echo -e "\n[TORMES]: Installing missing CGE modules\n"
+mkdir -p $TORMESDIR/../CGE-modules/pointfinder
+git clone https://bitbucket.org/genomicepidemiology/pointfinder.git $TORMESDIR/../CGE-modules/pointfinder
+git clone https://bitbucket.org/genomicepidemiology/pointfinder_db.git $TORMESDIR/../CGE-modules/pointfinder/pointfinder_db
+
+mkdir -p $TORMESDIR/../CGE-modules/fimtyper
+git clone https://bitbucket.org/genomicepidemiology/fimtyper.git $TORMESDIR/../CGE-modules/fimtyper
+git clone https://bitbucket.org/genomicepidemiology/fimtyper_db $TORMESDIR/../CGE-modules/fimtyper/fimtyper_db
+cpanm Try::Tiny
+
+mkdir -p $TORMESDIR/../CGE-modules/serotypefinder
+git clone https://bitbucket.org/genomicepidemiology/serotypefinder.git $TORMESDIR/../CGE-modules/serotypefinder
+git clone https://bitbucket.org/genomicepidemiology/serotypefinder_db.git $TORMESDIR/../CGE-modules/serotypefinder/serotypefinder_db
+
+echo -e "\n[TORMES]: Installing roary2svg.pl\n"
+wget https://raw.githubusercontent.com/sanger-pathogens/Roary/master/contrib/roary2svg/roary2svg.pl -O $TORMESDIR/roary2svg.pl
+chmod 777 $TORMESDIR/roary2svg.pl
+
+echo -e "\n[TORMES]: Installing Mini-Kraken2 DB 8GB\n"
+mkdir -p $TORMESDIR/../db/minikraken-DB
+wget ftp://ftp.ccb.jhu.edu/pub/data/kraken2_dbs/minikraken_8GB_202003.tgz -P $TORMESDIR/../db/minikraken-DB
+tar xzf $TORMESDIR/../db/minikraken-DB/minikraken_8GB_202003.tgz -C $TORMESDIR/../db/minikraken-DB
+rm $TORMESDIR/../db/minikraken-DB/minikraken_8GB_202003.tgz
+
+echo -e "\n[TORMES]: Installing RDPTools\n"
+#new for version 1.2.0
+git clone --recurse-submodules https://github.com/rdpstaff/RDPTools.git $TORMESDIR/../RDPTools
+make -C $TORMESDIR/../RDPTools/
+
+echo -e "\n[TORMES]: Setting up config_file.txt"
+mkdir -p $TORMESDIR/../files/
+cat<<EOF>$TORMESDIR/../files/config_file.txt
+#FILES${TAB}LOCATION
+ABRICATE${TAB}$(which abricate)
+BARRNAP${TAB}$(which barrnap)
+BLAST-2.6_or_later-BINARIES${TAB}$(which blastn | sed "s/blastn$//")
+CONVERT${TAB}$(which convert)
+FASTTREE${TAB}$(which fasttree)
+FIMTYPER${TAB}$TORMESDIR/../CGE-modules/fimtyper/fimtyper.pl
+FIMTYPER-DATABASE${TAB}$TORMESDIR/../CGE-modules/fimtyper/fimtyper_db
+KRAKEN2${TAB}$(which kraken2)
+KRAKEN-DATABASE${TAB}$TORMESDIR/../db/minikraken-DB/minikraken_8GB_20200312
+MAUVE${TAB}$(which Mauve | sed "s/Mauve$/..\/share\/mauve-*\/Mauve.jar/")
+MAUVE-BINARIES${TAB}$(which Mauve | sed "s/Mauve$//")
+MEGAHIT${TAB}$(which megahit)
+MLST${TAB}$(which mlst)
+PARALLEL${TAB}$(which parallel)
+POINTFINDER${TAB}$TORMESDIR/../CGE-modules/pointfinder/PointFinder.py
+POINTFINDER-DATABASE${TAB}$TORMESDIR/../CGE-modules/pointfinder/pointfinder_db
+PRINSEQ${TAB}$(which prinseq-lite.pl)
+PROKKA${TAB}$(which prokka)
+QUAST${TAB}$(which quast)
+RDP-CLASSIFIER${TAB}$TORMESDIR/../RDPTools/classifier.jar
+ROARY${TAB}$(which roary)
+ROARY2SVG${TAB}$TORMESDIR/roary2svg.pl
+RSCRIPT${TAB}$(which Rscript)
+SEROTYPEFINDER${TAB}$TORMESDIR/../CGE-modules/serotypefinder/serotypefinder.py
+SEROTYPEFINDER-DATABASE${TAB}$TORMESDIR/../CGE-modules/serotypefinder/serotypefinder_db
+SICKLE${TAB}$(which sickle)
+SISTR${TAB}$(which sistr)
+SPADES${TAB}$(which spades.py)
+TRIMMOMATIC${TAB}$(which trimmomatic)
+EOF
+
+echo -e "\n[TORMES]: Visit https://github.com/nmquijada/tormes for further information\n"
+echo -e "\n[TORMES]: TORMES is installed and ready to use. Enjoy!\n"
