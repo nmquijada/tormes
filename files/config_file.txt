@@ -1,5 +1,6 @@
 #FILES  LOCATION
 ABRICATE  /PATH/TO/abricate
+BARRNAP /PATH/TO/barrnap
 BLAST-2.6_or_later-BINARIES /PATH/TO/blast_bins
 CONVERT /PATH/TO/convert
 FASTTREE  /PATH/TO/FastTree
@@ -17,6 +18,7 @@ POINTFINDER-DATABASE  /PATH/TO/pointfinder_db
 PRINSEQ /PATH/TO/prinseq-lite
 PROKKA  /PATH/TO/prokka
 QUAST /PATH/TO/quast
+RDP-CLASSIFIER  /PATH/TO/rdp-classifier
 RSCRIPT /PATH/TO/Rscript
 ROARY /PATH/TO/roary
 ROARY2SVG /PATH/TO/roary2svg.pl
