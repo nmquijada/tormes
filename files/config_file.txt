@@ -6,6 +6,7 @@ CONVERT /PATH/TO/convert
 FASTTREE  /PATH/TO/FastTree
 FIMTYPER  /PATH/TO/fimtyper.pl
 FIMTYPER-DATABASE /PATH/TO/fimtyper/database
+KAPTIVE /PATH/TO/kaptive.py
 KRAKEN2  /PATH/TO//kraken2
 KRAKEN-DATABASE /PATH/TO/KRAKEN_DB
 MAUVE /PATH/TO/Mauve.jar
@@ -16,6 +17,7 @@ PARALLEL  /PATH/TO/parallel
 POINTFINDER /PATH/TO/PointFinder.py
 POINTFINDER-DATABASE  /PATH/TO/pointfinder_db
 PRINSEQ /PATH/TO/prinseq-lite
+PRODIGAL  /PATH/TO/prodigal
 PROKKA  /PATH/TO/prokka
 QUAST /PATH/TO/quast
 RDP-CLASSIFIER  /PATH/TO/rdp-classifier
