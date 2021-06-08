@@ -13,12 +13,7 @@ Additionally, you can couple TORMES with your metagenomic analysis, for a downst
 
 <br>
 
-### UPDATE 2020-10-07: New TORMES version 1.2.1 released!  
-*This version fixes bugs from version 1.2.0. Get track of the changes [here](https://github.com/nmquijada/tormes/releases/tag/v1.2.1).*  
-
-<br>
-
-The TORMES version 1.2.* includes novel features regarding the taxonomic identification of your dataset. Kraken2 is now used instead of Kraken (that was used in former versions of TORMES), that increases the sensitivity and speed for the taxonomic identification based on *k*-mers. Additionally, rRNA genes will be extracted from the genomes and the 16S rRNA genes will be  used for taxonomic classification by using the RDP Classifier.
+*We are transitioning to **TORMES version 1.3.0**. Please be aware, it will be released soon!*
 
 <br>
 
