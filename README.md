@@ -324,8 +324,11 @@ The dependencies described in [this section](#required-dependencies) are the bac
 
 ## Acknowledgements
 
-TORMES was devised and initially developed in the Instituto Tecnológico Agrario de Castilla y León (ITACyL, Valladolid, Spain) in collaboration with the University of Burgos (UBU, Burgos, Spain) and the Hospital Universitario del Río Hortega (Valladolid, Spain). The same institutions are still responsible of the continous development and maintainance of the sofware, aswell as new collaboration institutions and partners. That is the case of the University of Veterinary Medicine of Vienna (Vienna, Austria) and the Austrian Competence Center for Feed and Food Quality, Safety and Innovation (FFoQSI GmbH, Tulln, Austria).
-Additionally, we have the luck to count with new collaborators aprat from the included in the main citation of TORMES, that are actively involved in the development and improvement of the software. Their work is very much appreciated and their names will appear in future publications of the software. Great thanks to David Abad (Instituto Tecnológico Agrario de Castilla y León, ITACyL, Valladolid, Spain) and Bradley J. Hart (UniSA: Clinical and Health Sciences, University of South Australia, Adelaide, Australia).
+TORMES was devised and initially developed in the **Instituto Tecnológico Agrario de Castilla y León (ITACyL, Valladolid, Spain)** in collaboration with the **University of Burgos (UBU, Burgos, Spain)** and the Hospital Universitario del Río Hortega (Valladolid, Spain). The same institutions are still responsible of the continous development and maintainance of the sofware, aswell as new collaboration institutions and partners. That is the case of the **University of Veterinary Medicine of Vienna (Vienna, Austria)** and the **Austrian Competence Center for Feed and Food Quality, Safety and Innovation (FFoQSI GmbH, Tulln, Austria)**.  
+
+<br>
+
+Additionally, we have the luck to count with new collaborators aprat from the included in the main citation of TORMES, that are actively involved in the development and improvement of the software. Their work is very much appreciated and their names will appear in future publications of the software. Great thanks to **David Abad (Instituto Tecnológico Agrario de Castilla y León, ITACyL, Valladolid, Spain)** and **Bradley J. Hart (UniSA: Clinical and Health Sciences, University of South Australia, Adelaide, Australia)**.
 
 <br>
 
