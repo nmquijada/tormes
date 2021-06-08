@@ -328,7 +328,7 @@ TORMES was devised and initially developed in the **Instituto Tecnológico Agrar
 
 <br>
 
-Additionally, we have the luck to count with new collaborators aprat from the included in the main citation of TORMES, that are actively involved in the development and improvement of the software. Their work is very much appreciated and their names will appear in future publications of the software. Great thanks to **David Abad (Instituto Tecnológico Agrario de Castilla y León, ITACyL, Valladolid, Spain)** and **Bradley J. Hart (UniSA: Clinical and Health Sciences, University of South Australia, Adelaide, Australia)**.
+Additionally, we have the luck to count with new collaborators apart from the included in the main citation of TORMES, that are actively involved in the development and improvement of the software. Their work is very much appreciated and their names will appear in future publications of the software. Great thanks to **David Abad (Instituto Tecnológico Agrario de Castilla y León, ITACyL, Valladolid, Spain)** and **Bradley J. Hart (UniSA: Clinical and Health Sciences, University of South Australia, Adelaide, Australia)**.
 
 <br>
 
