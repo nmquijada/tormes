@@ -4,21 +4,30 @@
 <br>
 
 # TORMES
-An automated pipeline for whole bacterial genome analysis of genomes and/or raw Illumina paired-end sequencing data, regardless the number, origin or species.
+An automated and user-friendly pipeline for whole bacterial genome analysis of your genomes (previously assembled or downloaded from any repository) and/or your raw Illumina paired-end sequencing data, regardless the number of bacterial isolates, their origin or taxonomy.
 
-
-Since TORMES *version 1.1*, it is possible to include already assembled genomes in the analysis. This genomes can be analyzed by TORMES alone or in combination with raw sequencing data.   
-The inclusion of genomes in the pipeline can broaden your projects, by for instance including genomes that were sequenced from a technology different to Illumina and/or those that can be downloaded from your favorite repository (NCBI, PATRIC, etc.).
-Additionally, you can couple TORMES with your metagenomic analysis, for a downstream analysis of the Metagenomic Assembled Genomes (MAGs).
 
 <br>
 
-*We are transitioning to **TORMES version 1.3.0**. Please be aware, it will be released soon!*
+## UPDATE 08 June 2021: TORMES version 1.3.0 is released!
+
+This new version comes with a number of improvements!:
+
+ -	Specific analyses for *Klebsiella* by enabling the ```--genera Klebsiella``` option. The specific analyses include: plasmid detection by using PlasmidFinder, detection of point mutations associated with antimicrobial resistance by using PointFinder and subtyping of the isolates based on surface polysaccharide locus: complex capsule (K) and on complex LPS (O) locus by using Kaptive.
+ -  Possibility to perform nucleotide gene searches from user custom databases (must be nucleotide databases as the search is based on BLASTN by using ABRicate) by using the ```--custom_genes_db``` option (for instance ```--custom_genes_db “mydb1 mydb2 mydb3```). You can use as many custom databases as you want. The custom databases must have been previously formatted and installed in TORMES (see the instructions in the [Wiki](https://github.com/nmquijada/tormes/wiki/Installing-and-using-custom-nucleotide-databases-in-TORMES)).
+ -  You can set the maximum number of threads to use for genome assembly by using the ```--max_cpus_per_assembly``` option. For instance, if you set ```--threads 48``` (which set the maximum number of threads for TORMES to use to 48) and ```--max_cpus_per_assembly 8```, this will make TORMES to perform 6 assemblies in parallel by using 8 threads per assembly. Further descriptions of advantages and disadvantages will be discussed in the Wiki soon.
+ -  Set the minimum contig length of your assemblies by using the ```--min_contig_len``` option (default=200).
+ -  Possibility to modify the minimum percentage of coverage and identity of genes’ searches by using the ```--gene_min_cov``` and the ```--gene_min_id``` options, respectively (default = 80).
+ -  Disable genome annotation by Prokka and just perform gene prediction with Prodigal (```--only_gene_prediction``` option. Default=no)
+ -  You can set further options to be parsed to Prodigal as a string after the ```--prodigal_options``` flag (it requires the ```--only_gene_prediction``` option to enabled).
+ -  A “citation.txt” file will be created in your run including the citations of each of the software and databases that were used in your analysis (will also be included in the “Citations” section of the tormes-report). TORMES is a pipeline that rely on all the software included in each "citations.txt" file and we strongly encourage to cite them all when citing TORMES (some excamples will appear in the Wiki soon)
+ -  The "DT" R package is now used for the tormes-report generation, which renders interactive tables in the *tormes_report.html* file.
+
 
 <br>
 
-*All the information contained in this README refers to **TORMES version 1.2.1***  
-Get track of the improvements in TORMES pipeline in the [Versions history](#versions-history) section.  
+*All the information contained in this README refers to **TORMES version 1.3.0***
+Get track of the improvements in TORMES pipeline in the [Versions history](#versions-history) section.
 For further information or additional uses you can also visit the [TORMES wiki](https://github.com/nmquijada/tormes/wiki).
 
 
@@ -32,9 +41,9 @@ For further information or additional uses you can also visit the [TORMES wiki](
       * [Obligatory options](#obligatory-options)
   * [Output](#output)
   * [Rendering customized reports](#rendering-customized-reports)
-  * [Open-source and networking community](#open-source-and-networking-community)
   * [Citation](#citation)
   * [Acknowledgements](#acknowledgements)
+  * [Open-source and networking community](#open-source-and-networking-community)
   * [License](#license)
   * [Versions history](#versions-history)
 
@@ -56,22 +65,23 @@ TORMES work with every bacterial WGS dataset, regardless the number, origin or s
 9) Virulence genes screening
 10) Pangenome comparison (optional)
 
-When working with *Escherichia* or *Salmonella* sequence data, extensive analysis can be enabled (by using the `-g/--genera` option), including:
+When working with *Escherichia*, *Klebsiella* or *Salmonella* sequencing data, extensive analysis can be enabled (by using the `-g/--genera` option), including:
 
 11) Antibiotic resistance screening based on point mutations
 12) Plasmid replicons screening
-13) Serotyping
+13) Serotyping (only for *Escherichia* and *Salmonella*)
 14) fimH-Typing (only for *Escherichia*)
+15) Subtyping based on surface polysaccharide locus: complex capsule (K) and on complex LPS (O) locus (only for *Klebsiella*)
 
 Once the WGS analysis is ended, TORMES summarizes the results in an interactive web-like file that can be opened in any web browser, making the results easy to analyze, compare and share.
 
-15) Interactive report generation (customizable)
+16) Interactive report generation (customizable)
 
 <br>
 
 TORMES is written in a combination of Bash, R and R Markdown. Once the WGS is ended, TORMES will automatically generate a RMarkdown file (unique for each analysis) that will be use to render the report in R environment. This file is susceptible for user's modification and the generation of user-specific reports (by including additional information, tables, figures, *etc.*). Additional information can be found in the [Rendering customized reports](#rendering-customized-reports) section.
 TORMES is a pipeline, and for its use it is necessary the utilization of a lot of bioinformatic tools that constitutes the backbone of TORMES and that are listed in the [Required dependencies](#required-dependencies) section.
-The availability of open-source, user-friendly pipelines, will broaden the application of certain technologies, such as WGS, where the bottleneck sometimes rely in the complex bioinformatic analysis of the great amount of data that is generated by high-throughput DNA sequencing (HTS) platforms. TORMES was devised with this aim, inspired by some excellent currently available software, such as [Nullarbor](https://github.com/tseemann/nullarbor), [EnteroBase](https://enterobase.warwick.ac.uk/) and the [Center for Genomic Epidemiology](https://cge.cbs.dtu.dk/services/). Nowadays, there are other alternatives for conducting WGS analysis, as more software are appearing regularly, such as the recently published [Bactopia](https://github.com/bactopia/bactopia). Every software offers different features towards specific outcomes, providing the users with a wide variety of option to face WGS.  
+The availability of open-source, user-friendly pipelines, will broaden the application of certain technologies, such as WGS, where the bottleneck sometimes rely in the complex bioinformatic analysis of the great amount of data that is generated by high-throughput DNA sequencing (HTS) platforms. TORMES was devised with this aim, inspired by some excellent currently available software, such as [Nullarbor](https://github.com/tseemann/nullarbor), [EnteroBase](https://enterobase.warwick.ac.uk/) and the [Center for Genomic Epidemiology](https://cge.cbs.dtu.dk/services/). Nowadays, there are other alternatives for conducting WGS analysis, as more software are appearing regularly, such as the recently published [Bactopia](https://github.com/bactopia/bactopia). Every software offers different features towards specific outcomes, providing the users with a wide variety of option to face WGS.
 We would like TORMES to be regularly updated with the most novel tools and databases, and to improve the pipeline taking into account users' suggestions.
 
 <br>
@@ -81,15 +91,15 @@ We would like TORMES to be regularly updated with the most novel tools and datab
 TORMES is a pipeline that requires a lot of dependencies to work. It has been devised to be used as a conda environment. For installing TORMES an all its dependencies run:
 
 ```
-wget https://anaconda.org/nmquijada/tormes-1.2.1/2020.10.07.080943/download/tormes-1.2.1.yml
-conda env create -n tormes-1.2.1 --file tormes-1.2.1.yml
+wget https://anaconda.org/nmquijada/tormes-1.3.0/2021.06.08.113021/download/tormes-1.3.0.yml
+conda env create -n tormes-1.3.0 --file tormes-1.3.0.yml
 ```
 <br>
 
 To activate TORMES environment run:
 
 ```
-conda activate tormes-1.2.1
+conda activate tormes-1.3.0
 ```
 <br>
 
@@ -99,15 +109,15 @@ Additionally, the first time you are using TORMES, run (after activating TORMES 
 tormes-setup
 ```
 
-This step will install additional dependencies not available in conda and will automatically create the **config_file.txt** required for TORMES to work (see below).  
+This step will install additional dependencies not available in conda and will automatically create the **config_file.txt** required for TORMES to work (see below).
 This script will download the [MiniKraken2_v1_8GB](https://ccb.jhu.edu/software/kraken2/index.shtml?t=downloads) database required for Kraken2 to work. This database takes ~8 GB space and it is downloaded by default in order to facilitate TORMES installation. If the user has enough disk space and RAM power, we encourage to download and install the "Standard Kraken2 Database" by following the instructions provided by [Kraken2 developers](https://github.com/DerrickWood/kraken2/wiki/Manual#standard-kraken-2-database). The "Standard Kraken2 Database" will increase the sensitivity of the taxonomic identification. However, this is not needed for running TORMES. It will equally work with the MiniKraken2_v1_8GB.
 
 <br>
 
-If you were already using a previous version of TORMES, sometimes conda runs into issues when installing more than one version of TORMES due to the differential version of the included dependencies (each new version of TORMES includes the current version of the dependencies).  
+If you were already using a previous version of TORMES, sometimes conda runs into issues when installing more than one version of TORMES due to the differential version of the included dependencies (each new version of TORMES includes the current version of the dependencies).
 If you run into such problems, just remove the previous TORMES environment and "clean up" the system by doing:
 ```
-conda env remove -n tormes-1.1
+conda env remove -n tormes-1.2.1
 conda clean --all
 ```
 
@@ -124,6 +134,7 @@ TORMES is a pipeline and it requires several dependencies to work (all of them w
   * [Megahit](https://github.com/voutcn/megahit)
   * [mlst](https://github.com/tseemann/mlst)
   * [Prinseq](http://prinseq.sourceforge.net/)
+  * [Prodigal](https://github.com/hyattpd/Prodigal)
   * [progrressiveMauve](http://darlinglab.org/mauve/mauve.html)
   * [Prokka](https://github.com/tseemann/prokka)
   * [Quast](http://quast.sourceforge.net/quast)
@@ -141,6 +152,10 @@ Additional software when working with `-g/--genera Escherichia`.
   * [FimTyper](https://bitbucket.org/genomicepidemiology/fimtyper/overview)
   * [SerotypeFinder](https://bitbucket.org/genomicepidemiology/serotypefinder)
 
+Additional software when working with `-g/--genera Klebsiella`.
+  * [Kaptive](https://github.com/katholt/Kaptive)
+  * [PointFinder](https://bitbucket.org/genomicepidemiology/pointfinder)
+
 Additional software when working with `-g/--genera Salmonella`.
   * [PointFinder](https://bitbucket.org/genomicepidemiology/pointfinder)
   * [SISTR](https://lfz.corefacility.ca/sistr-app/)
@@ -155,40 +170,52 @@ You can find an example of the config_file.txt [here](https://github.com/nmquija
 ```
 Usage: tormes [options]
 
-OBLIGATORY OPTIONS:
-        -m/--metadata   Path to the file with the metadata regarding the samples (raw reads and/or genomes)
-                        The metadat file must have an specific organization for the program to work.
-                        If you don't have any or you would like to have an example or extra information,
-                        please type:
-                        tormes example-metadata
-        -o/--output     Path and name of the output directory
+        OBLIGATORY OPTIONS:
+          -m/--metadata           Path to the file with the metadata regarding the samples (raw reads and/or genomes)
+                                  The metadata file must have an specific organization for the program to work.
+                                  If you don't have any or you would like to have an example or extra information, please type:
+                                  tormes example-metadata
+          -o/--output             Path and name of the output directory
 
-OTHER OPTIONS:
-        -a/--adapter    Path to the adapters file
-                        (default="PATH/TO/TORMES/files/adapters.fasta")
-        --assembler     Select the assembler to use. Options available: 'spades', 'megahit'
-                        (default='spades')
-        -c/--config     Path to the configuration file with the location of all dependencies
-                        (default="PATH/TO/TORMES/files/config_file.txt")
-        --citation      Show citation
-        --fast          Faster analysis (default='0')
-                        ('megahit' is used as assembler and contig ordering and pangenome analysis are disabled)
-        --filtering     Select the software for filtering the reads.
-                        Options available: 'prinseq', 'sickle', 'trimmomatic'
-                        (default="prinseq")
-        -g/--genera     Type genera name to allow special analysis (default='none')
-                        Options available: 'Escherichia', 'Salmonella'
-        -h/--help       Show this help
-        --min_len       Minimum length to the reads to survive after filtering (default=125) <integer>
-        --no_mlst       Disable MLST analysis (default='0')
-        --no_pangenome  Disable pangenome analysis (default='0')
-        -q/--quality    Minimum mean phred score of the reads to survive after filtering (default=25) <integer>
-        -r/--reference  Type path to reference genome (fasta, gbk) (default='none')
-                        Reference will be ONLY used for contig ordering of the draft genome
-        -t/--threads    Number of threads to use (default=1) <integer>
-        --title         Path to a file containing the title in the project that will be used as title in the report
-                        Avoid using special characters. TORMES will perform a default title if this option is not used
-        -v/--version    Show version
+        OTHER OPTIONS:
+          -a/--adapter            Path to the adapters file
+                                  (default="PATH/TO/TORMES/files/adapters.fasta")
+          --assembler             Select the assembler to use. Options available: 'spades', 'megahit'
+                                  (default='spades')
+          -c/--config             Path to the configuration file with the location of all dependencies
+                                  (default="PATH/TO/TORMES/files/config_file.txt")
+          --citation              Show citation of TORMES
+          --custom_genes_db       <string> space-separated list of custom genes databases names.
+                                  Requires the previous installation of the databases in TORMES (see https://github.com/nmquijada/tormes/wiki/Installing-and-using-custom-nucleotide-databases-in-TORMES for more instructions)
+          --fast                  Faster analysis (default='0')
+                                   * 'trimmomatic' is used for read quality filtering
+                                   * 'megahit' is used as assembler
+                                   * contig ordering and pangenome analysis are disabled
+                                   * only gene prediction but not annotation is performed
+          --filtering             Select the software for filtering the reads.
+                                  Options available: 'prinseq', 'sickle', 'trimmomatic'
+                                  (default="prinseq")
+          -g/--genera             Type genera name to allow special analysis (default='none')
+                                  Options available: 'Escherichia', 'Klebsiella', 'Salmonella'
+          --gene_min_id           Minimum identity (%) of a gene against the database to be considered (default=80)
+          --gene_min_cov          Minimum coverage (%) of a gene against the database to be considered (default=80)
+          -h/--help               Show this help
+          --max_cpus_per_assembly Set the maximum threads to use per assembly (default=the same as -t/--threads option)
+          --min_len               Minimum length (bp) to the reads to survive after filtering (default=125) <integer>
+          --min_contig_len        Minimum length (bp) of each contig to be kept in the genome after the assembly (default=200) <integer>
+          --no_mlst               Disable MLST analysis (default='0')
+          --no_pangenome          Disable pangenome analysis (default='0')
+          --only_gene_prediction  Only gene prediction (Prodigal) but not annotation of the genes (Prokka) is performed.
+                                  Pangenome analysis (Roary) will be also disabled (default='0')
+          --prodigal_options      <string> Only whith "--only_gene_prediction". Specify further options for Prodigal (distinct to -a -d -f -i and -o)
+          -q/--quality            Minimum mean phred score of the reads to survive after filtering (default=$QUALITY) <integer>
+          -r/--reference          Type path to reference genome (fasta, gbk) (default='none')
+                                  Reference will be ONLY used for contig ordering of the draft genome
+          -t/--threads            Number of threads to use (default=1) <integer>
+          --title                 Path to a file containing the title in the project that will be used as title in the report
+                                  Avoid using special characters. TORMES will perform a default title if this option is not used
+          -v/--version            Show version
+
 ```
 <br>
 
@@ -292,20 +319,6 @@ This command will generate a new "**tormes_report.html**".
 
 <br>
 
-## Open-source and networking community
-
-TORMES was devised with the aim of being an open-source and easy tool that everybody can use for their WGS experiments. Bacterial bioinformatics is developing rapidly, and the availability of open code and tools is crucial for the scientific community to benefit from these developments.
-
-Additionally, TORMES is intended to be a networking project with users providing their feedback and personal experience so that TORMES can become a more complete pipeline including as many analyses and genera as possible.  
-There’s been more than a year since we launch this tool and we are very happy with the responses from the community. Most of the suggestions are considered for further improvements of the TORMES pipeline and some users have also shared their code that could be used to extend TORMES analysis and/or to overcome some issues/challenges.
-We are working for a finer tool for WGS that can be freely provided to the community and definitively the feedback from users is being pivotal.
-
-<br>
-
-- [**@biobrad**](https://github.com/biobrad) has developed [**Tormesbot**]( https://github.com/biobrad/tormesbot/wiki/Tormesbot), a tool to assist other microbiologists who are not computer savvy in manipulating the metadata and parsing arguments to a HPC environment.
-
-<br>
-
 ## Citation
 
 Please cite the following pubication if you are using TORMES:
@@ -324,11 +337,25 @@ The dependencies described in [this section](#required-dependencies) are the bac
 
 ## Acknowledgements
 
-TORMES was devised and initially developed in the **Instituto Tecnológico Agrario de Castilla y León (ITACyL, Valladolid, Spain)** in collaboration with the **University of Burgos (UBU, Burgos, Spain)** and the Hospital Universitario del Río Hortega (Valladolid, Spain). The same institutions are still responsible of the continous development and maintainance of the sofware, aswell as new collaboration institutions and partners. That is the case of the **University of Veterinary Medicine of Vienna (Vienna, Austria)** and the **Austrian Competence Center for Feed and Food Quality, Safety and Innovation (FFoQSI GmbH, Tulln, Austria)**.  
+TORMES was devised and initially developed in the **Instituto Tecnológico Agrario de Castilla y León (ITACyL, Valladolid, Spain)** in collaboration with the **University of Burgos (UBU, Burgos, Spain)** and the Hospital Universitario del Río Hortega (Valladolid, Spain). The same institutions are still responsible of the continous development and maintainance of the sofware, aswell as new collaboration institutions and partners. That is the case of the **University of Veterinary Medicine of Vienna (Vienna, Austria)** and the **Austrian Competence Center for Feed and Food Quality, Safety and Innovation (FFoQSI GmbH, Tulln, Austria)**.
 
 <br>
 
 Additionally, we have the luck to count with new collaborators apart from the included in the main citation of TORMES, that are actively involved in the development and improvement of the software. Their work is very much appreciated and their names will appear in future publications of the software. Great thanks to **David Abad (Instituto Tecnológico Agrario de Castilla y León, ITACyL, Valladolid, Spain)** and **Bradley J. Hart (UniSA: Clinical and Health Sciences, University of South Australia, Adelaide, Australia)**.
+
+<br>
+
+## Open-source and networking community
+
+TORMES was devised with the aim of being an open-source and easy tool that everybody can use for their WGS experiments. Bacterial bioinformatics is developing rapidly, and the availability of open code and tools is crucial for the scientific community to benefit from these developments.
+
+Additionally, TORMES is intended to be a networking project with users providing their feedback and personal experience so that TORMES can become a more complete pipeline including as many analyses and genera as possible.
+There’s been more than a year since we launch this tool and we are very happy with the responses from the community. Most of the suggestions are considered for further improvements of the TORMES pipeline and some users have also shared their code that could be used to extend TORMES analysis and/or to overcome some issues/challenges.
+We are working for a finer tool for WGS that can be freely provided to the community and definitively the feedback from users is being pivotal.
+
+<br>
+
+- [**@biobrad**](https://github.com/biobrad) has developed [**Tormesbot**]( https://github.com/biobrad/tormesbot/wiki/Tormesbot), a tool to assist other microbiologists who are not computer savvy in manipulating the metadata and parsing arguments to a HPC environment.
 
 <br>
 
@@ -338,6 +365,7 @@ TORMES is a free software, licensed under [GPLv3](https://github.com/nmquijada/t
 <br>
 
 ## Versions history
-- **v.1.2.\*** (*current*): New features: Kraken2 is now used instead of Kraken, increasing the sensitivity and speed for the taxonomic identification based on *k*-mers. Additionally, rRNA genes will be extracted from the genomes and the 16S rRNA genes will be  used for taxonomic classification by using the RDP Classifier.
+- **v.1.3.\*** (*current*)
+- **v.1.2.\*** (October 2020): New features: Kraken2 is now used instead of Kraken, increasing the sensitivity and speed for the taxonomic identification based on *k*-mers. Additionally, rRNA genes will be extracted from the genomes and the 16S rRNA genes will be  used for taxonomic classification by using the RDP Classifier.
 - **v.1.1.\*** (April 2020): New features: Enables the option to include already assembled genomes into the analysis, alone or in combination with raw sequencing data. Script "*render_report.sh*" is automatically generated in the "report_files" directory for easy generate the report.
 - **v.1.0.\*** (April 2019): original version of the TORMES pipeline.
