@@ -1,0 +1,257 @@
+#! /bin/bash
+
+VERSION="1.3.0"
+
+TORMES=$0
+while [ -h "$TORMES" ]; do # resolve $TORMES until the file is no longer a symlink
+  TORMESDIR="$( cd -P "$( dirname "$0" )" && pwd )"
+  TORMES="$(readlink "$TORMES")"
+  [[ $TORMES != /* ]] && TORMES="$TORMESDIR/$TORMES" # if $TORMES is a symlink, resolve it relative to the path where the symlink file was located
+done
+TORMESDIR="$( cd -P "$( dirname "$TORMES" )" && pwd )"
+TAB="$(printf '\t')"
+
+if [ -d "$TORMESDIR/../CGE-modules/" ]; then
+	echo -e "\nERROR: $TORMESDIR/../CGE-modules/ already exist! Please check \n"
+	exit 1
+fi
+
+cat << EOF
+
+[TORMES]: This is tormes-setup for TORMES version $VERSION"
+
+[TORMES]: Developed by Narciso Martin Quijada
+
+[TORMES]: This script will download some software and databases and might take a while...
+EOF
+
+echo -e "\n[TORMES]: Installing missing R packages\n"
+
+#In some shared-machines the R_LIBS variable is set by the administrator and drives to errors
+#In R, check the .libPaths() output
+#This should solve the issue
+export R_LIBS=$TORMESDIR/../lib/R/library/
+# For some reason, in some build-up machines with R and R variables already stablished, BiocManager installs v=3.9 through conda (out of date)
+Rscript -e 'library(BiocManager); BiocManager::install(version = "3.10", ask = FALSE, lib.loc="$TORMESDIR/../lib/R/library/")'
+Rscript -e 'library(BiocManager); BiocManager::install("ggtree", ask = FALSE, lib.loc="$TORMESDIR/../lib/R/library/")'
+Rscript -e 'library(BiocManager); BiocManager::install("treeio", ask = FALSE, lib.loc="$TORMESDIR/../lib/R/library/")'
+
+
+echo -e "\n[TORMES]: Installing missing CGE modules\n"
+mkdir -p $TORMESDIR/../CGE-modules/pointfinder
+git clone https://bitbucket.org/genomicepidemiology/pointfinder.git $TORMESDIR/../CGE-modules/pointfinder
+git clone https://bitbucket.org/genomicepidemiology/pointfinder_db.git $TORMESDIR/../CGE-modules/pointfinder/pointfinder_db
+
+mkdir -p $TORMESDIR/../CGE-modules/fimtyper
+git clone https://bitbucket.org/genomicepidemiology/fimtyper.git $TORMESDIR/../CGE-modules/fimtyper
+git clone https://bitbucket.org/genomicepidemiology/fimtyper_db $TORMESDIR/../CGE-modules/fimtyper/fimtyper_db
+#cpanm Try::Tiny
+
+mkdir -p $TORMESDIR/../CGE-modules/serotypefinder
+git clone https://bitbucket.org/genomicepidemiology/serotypefinder.git $TORMESDIR/../CGE-modules/serotypefinder
+git clone https://bitbucket.org/genomicepidemiology/serotypefinder_db.git $TORMESDIR/../CGE-modules/serotypefinder/serotypefinder_db
+
+echo -e "\n[TORMES]: Installing roary2svg.pl\n"
+wget https://raw.githubusercontent.com/sanger-pathogens/Roary/master/contrib/roary2svg/roary2svg.pl -O $TORMESDIR/roary2svg.pl
+chmod 777 $TORMESDIR/roary2svg.pl
+
+echo -e "\n[TORMES]: Installing Mini-Kraken2 DB 8GB\n"
+mkdir -p $TORMESDIR/../db/minikraken-DB
+wget ftp://ftp.ccb.jhu.edu/pub/data/kraken2_dbs/minikraken_8GB_202003.tgz -P $TORMESDIR/../db/minikraken-DB
+tar xzf $TORMESDIR/../db/minikraken-DB/minikraken_8GB_202003.tgz -C $TORMESDIR/../db/minikraken-DB
+rm $TORMESDIR/../db/minikraken-DB/minikraken_8GB_202003.tgz
+
+echo -e "\n[TORMES]: Downloading reference files for Kaptive\n"
+mkdir -p $TORMESDIR/../db/kaptive
+wget -P $TORMESDIR/../db/kaptive/ https://raw.githubusercontent.com/katholt/Kaptive/master/reference_database/Klebsiella_k_locus_primary_reference.gbk
+wget -P $TORMESDIR/../db/kaptive/ https://raw.githubusercontent.com/katholt/Kaptive/master/reference_database/Klebsiella_o_locus_primary_reference.gbk
+
+echo -e "\n[TORMES]: Setting up config_file.txt"
+mkdir -p $TORMESDIR/../files/
+cat<<EOF>$TORMESDIR/../files/config_file.txt
+#FILES${TAB}LOCATION
+ABRICATE${TAB}$(which abricate)
+BARRNAP${TAB}$(which barrnap)
+BLAST-2.6_or_later-BINARIES${TAB}$(which blastn | sed "s/blastn$//")
+CONVERT${TAB}$(which convert)
+FASTTREE${TAB}$(which fasttree)
+FIMTYPER${TAB}$TORMESDIR/../CGE-modules/fimtyper/fimtyper.pl
+FIMTYPER-DATABASE${TAB}$TORMESDIR/../CGE-modules/fimtyper/fimtyper_db
+KAPTIVE${TAB}$(which kaptive.py)
+KRAKEN2${TAB}$(which kraken2)
+KRAKEN-DATABASE${TAB}$TORMESDIR/../db/minikraken-DB/minikraken_8GB_20200312
+MAUVE${TAB}$(which Mauve | sed "s/Mauve$/..\/share\/mauve-*\/Mauve.jar/")
+MAUVE-BINARIES${TAB}$(which Mauve | sed "s/Mauve$//")
+MEGAHIT${TAB}$(which megahit)
+MLST${TAB}$(which mlst)
+PARALLEL${TAB}$(which parallel)
+POINTFINDER${TAB}$TORMESDIR/../CGE-modules/pointfinder/PointFinder.py
+POINTFINDER-DATABASE${TAB}$TORMESDIR/../CGE-modules/pointfinder/pointfinder_db
+PRINSEQ${TAB}$(which prinseq-lite.pl)
+PRODIGAL${TAB}$(which prodigal)
+PROKKA${TAB}$(which prokka)
+QUAST${TAB}$(which quast)
+RDP-CLASSIFIER${TAB}$(which classifier)
+ROARY${TAB}$(which roary)
+ROARY2SVG${TAB}$TORMESDIR/roary2svg.pl
+RSCRIPT${TAB}$(which Rscript)
+SEROTYPEFINDER${TAB}$TORMESDIR/../CGE-modules/serotypefinder/serotypefinder.py
+SEROTYPEFINDER-DATABASE${TAB}$TORMESDIR/../CGE-modules/serotypefinder/serotypefinder_db
+SICKLE${TAB}$(which sickle)
+SISTR${TAB}$(which sistr)
+SPADES${TAB}$(which spades.py)
+TRIMMOMATIC${TAB}$(which trimmomatic)
+EOF
+
+## Check installation
+
+echo -e "\n[TORMES]: Testing that every software and database has been succesfully downloaded and installed\n"
+
+CONFIG=$TORMESDIR/../files/config_file.txt
+#SOFTWARE
+ABRICATE="$( grep -w "^ABRICATE\s" $CONFIG | cut -f 2 -d "$TAB" )"
+BARRNAP="$( grep -w "^BARRNAP\s" $CONFIG | cut -f 2 -d "$TAB" )"
+BLASTBINS="$( grep -w "^BLAST-2\.6_or_later-BINARIES\s" $CONFIG | cut -f 2 -d "$TAB" )"
+CONVERT="$( grep -w "^CONVERT\s" $CONFIG | cut -f 2 -d "$TAB" )"
+#FASTQC="$( grep -w "^FASTQC\s" $CONFIG | cut -f 2 -d "$TAB" )"
+FASTTREE="$( grep -w "^FASTTREE\s" $CONFIG | cut -f 2 -d "$TAB" )"
+FIMTYPER="$( grep -w "^FIMTYPER\s" $CONFIG | cut -f 2 -d "$TAB" )"
+FIMTYPERDB="$( grep -w "^FIMTYPER-DATABASE\s" $CONFIG | cut -f 2 -d "$TAB" )"
+KAPTIVE="$( grep -w "^KAPTIVE\s" $CONFIG | cut -f 2 -d "$TAB" )"
+KRAKEN2="$( grep -w "^KRAKEN2\s" $CONFIG | cut -f 2 -d "$TAB" )"
+KRAKENDB="$( grep -w "^KRAKEN-DATABASE\s" $CONFIG | cut -f 2 -d "$TAB" )"
+MEGAHIT="$( grep -w "^MEGAHIT\s" $CONFIG | cut -f 2 -d "$TAB" )"
+MAUVE="$( grep -w "^MAUVE\s" $CONFIG | cut -f 2 -d "$TAB" )"
+MAUVEBINS="$( grep -w "^MAUVE-BINARIES\s" $CONFIG | cut -f 2 -d "$TAB" )"
+MLST="$( grep -w "^MLST\s" $CONFIG | cut -f 2 -d "$TAB" )"
+PARALLEL="$( grep -w "^PARALLEL\s" $CONFIG | cut -f 2 -d "$TAB" )"
+POINTFINDER="$( grep -w "^POINTFINDER\s" $CONFIG | cut -f 2 -d "$TAB" )"
+POINTFINDERDB="$( grep -w "^POINTFINDER-DATABASE\s" $CONFIG | cut -f 2 -d "$TAB" )"
+PRINSEQ="$( grep -w "^PRINSEQ\s" $CONFIG | cut -f 2 -d "$TAB" )"
+PRODIGAL="$( grep -w "^PRODIGAL\s" $CONFIG | cut -f 2 -d "$TAB" )"
+PROKKA="$( grep -w "^PROKKA\s" $CONFIG | cut -f 2 -d "$TAB" )"
+QUAST="$( grep -w "^QUAST\s" $CONFIG | cut -f 2 -d "$TAB" )"
+RDPCLASSIFIER="$( grep -w "^RDP-CLASSIFIER\s" $CONFIG | cut -f 2 -d "$TAB" )"
+ROARY="$( grep -w "^ROARY\s" $CONFIG | cut -f 2 -d "$TAB" )"
+ROARY2SVG="$( grep -w "^ROARY2SVG\s" $CONFIG | cut -f 2 -d "$TAB" )"
+RSCRIPT="$( grep -w "^RSCRIPT\s" $CONFIG | cut -f 2 -d "$TAB" )"
+SEROTYPEFINDER="$( grep -w "^SEROTYPEFINDER\s" $CONFIG | cut -f 2 -d "$TAB" )"
+SEROTYPEFINDERDB="$( grep -w "^SEROTYPEFINDER-DATABASE\s" $CONFIG | cut -f 2 -d "$TAB" )"
+SICKLE="$( grep -w "^SICKLE\s" $CONFIG | cut -f 2 -d "$TAB" )"
+SISTR="$( grep -w "^SISTR\s" $CONFIG | cut -f 2 -d "$TAB" )"
+SPADES="$( grep -w "^SPADES\s" $CONFIG | cut -f 2 -d "$TAB" )"
+TRIMMOMATIC="$( grep -w "^TRIMMOMATIC\s" $CONFIG | cut -f 2 -d "$TAB" )"
+
+dependencies=(
+ABRICATE
+BARRNAP
+CONVERT
+FASTTREE
+FIMTYPER
+KAPTIVE
+KRAKEN2
+MEGAHIT
+MLST
+PARALLEL
+POINTFINDER
+PRINSEQ
+PRODIGAL
+PROKKA
+QUAST
+RDPCLASSIFIER
+ROARY
+ROARY2SVG
+RSCRIPT
+SEROTYPEFINDER
+SICKLE
+SISTR
+SPADES
+TRIMMOMATIC
+)
+
+for i in "${dependencies[@]}"; do
+  if [[ -z ${!i} ]]; then
+    echo -e "\nERROR: Software ${i} not found!"
+    echo -e "Please check if the software path in $CONFIG is incorrect\n"
+    echo "ERROR: Software ${i} not found!" >> tormes-install-warnings.log
+  else
+    echo -e "Software ${i} set to: \c"
+    echo "${!i}";
+  fi
+  if command -v ${!i} >/dev/null 2>&1 ; then
+    echo "Software: ${!i} found"
+  else
+    echo -e "\nERROR: Software ${i} not found! Please check if:"
+    echo -e "\t * Software is not installed"
+    echo -e "\t * Software is installed but the path in $CONFIG is incorrect\n"
+    echo "ERROR: Software ${i} not found!" >> tormes-install-warnings.log
+  fi
+done
+
+## MAUVE
+if [ -z "$MAUVE" ]; then
+  echo -e "\nERROR: Software MAUVE not found!"
+  echo -e "Please check if the software path in $CONFIG is incorrect\n"
+  echo "ERROR: Software MAUVE not found!" >> tormes-install-warnings.log
+fi
+if [ -s $MAUVE ]; then
+	echo "Software: $MAUVE found"
+else
+	echo -e "\nERROR: Software $MAUVE not found! Please check if:"
+  echo -e "\t * Software is not installed"
+  echo -e "\t * Software is installed but the path in $CONFIG is incorrect\n"
+  echo "ERROR: Software MAUVE not found!" >> tormes-install-warnings.log
+fi
+if command -v $MAUVEBINS/progressiveMauve >/dev/null 2>&1 ; then
+  echo "Binaries for MAUVE found"
+	export PATH=$MAUVEBINS:$PATH
+else
+  echo -e "\nERROR: Binaries for MAUVE not found! Please check if:"
+  echo -e "\t * Binaries are not installed"
+  echo -e "\t * Binaries are installed but the path in $CONFIG is incorrect\n"
+  echo "ERROR: Binaries for MAUVE not found!" >> tormes-install-warnings.log
+fi
+
+# KRAKENDB
+if [ -z "$KRAKENDB" ]; then
+  echo -e "\nERROR: KRAKEN-DATABASE not found!"
+  echo -e "Please check if the software path in $CONFIG is incorrect\n"
+  echo "ERROR: KRAKEN-DATABASE not found!" >> tormes-install-warnings.log
+fi
+if [ -d "$KRAKENDB" ]; then
+  echo "Directory for $KRAKENDB found"
+else
+  echo -e "\nERROR: Directory for $KRAKENDB not found! Please check if:"
+  echo -e "\t * Database is not installed"
+  echo -e "\t * Database is installed but the path in $CONFIG is incorrect\n"
+  echo "ERROR: KRAKEN-DATABASE not found!" >> tormes-install-warnings.log
+fi
+
+#### BLASTBINS
+if [ -z "$BLASTBINS" ]; then
+  echo -e "\nERROR: Software BLAST-2.6_or_later-BINARIES not found!"
+  echo -e "Please check if the software path in $CONFIG is incorrect\n"
+  echo "ERROR: Software BLAST-2.6_or_later-BINARIES not found!" >> tormes-install-warnings.log
+fi
+if command -v $BLASTBINS/blastn >/dev/null 2>&1 ; then
+  echo "Binaries for BLAST version 2.6 or later found"
+else
+  echo -e "\nERROR: Binaries for BLAST version 2.6 or later required when -g/--genera \'$GENERA\' not found! Please check if:"
+  echo -e "\t * Binaries are not installed"
+  echo -e "\t * Binaries are installed but the path in $CONFIG is incorrect"
+  echo -e "\t   (it should be the path to blast-2.6 (or later)  main folder, where 'bin' directory is placed)\n"
+  echo "ERROR: Software BLAST-2.6_or_later-BINARIES not found!" >> tormes-install-warnings.log
+fi
+
+
+## FINISH
+if [ -s tormes-install-warnings.log ]; then
+  echo -e "\n[TORMES]: TORMES installataion finished with the following warnings:\n"
+  cat tormes-install-warnings.log
+  echo -e "\n[TORMES]: Please check!"
+  echo -e "[TORMES]: You can open an issue in https://github.com/nmquijada/tormes\n"
+  echo -e "\n[TORMES]: Installation warnings stored in: tormes-install-warnings.log\n"
+else
+  echo -e "\n[TORMES]: Visit https://github.com/nmquijada/tormes for further information\n"
+  echo -e "\n[TORMES]: TORMES is installed and ready to use. Enjoy!\n"
+fi
