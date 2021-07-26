@@ -338,7 +338,7 @@ The dependencies described in [this section](#required-dependencies) are the bac
 
 ## Acknowledgements
 
-TORMES was devised and initially developed in the **Instituto Tecnológico Agrario de Castilla y León (ITACyL, Valladolid, Spain)** in collaboration with the **University of Burgos (UBU, Burgos, Spain)** and the Hospital Universitario del Río Hortega (Valladolid, Spain). The same institutions are still responsible of the continous development and maintainance of the sofware, aswell as new collaboration institutions and partners. That is the case of the **University of Veterinary Medicine of Vienna (Vienna, Austria)** and the **Austrian Competence Center for Feed and Food Quality, Safety and Innovation (FFoQSI GmbH, Tulln, Austria)**.
+TORMES was devised and initially developed in the **Instituto Tecnológico Agrario de Castilla y León (ITACyL, Valladolid, Spain)** in collaboration with the **University of Burgos (UBU, Burgos, Spain)** and the **Hospital Universitario del Río Hortega (Valladolid, Spain)**. The same institutions are still responsible of the continous development and maintainance of the sofware, aswell as new collaboration institutions and partners. That is the case of the **University of Veterinary Medicine of Vienna (Vienna, Austria)** and the **Austrian Competence Center for Feed and Food Quality, Safety and Innovation (FFoQSI GmbH, Tulln, Austria)**.
 
 <br>
 
