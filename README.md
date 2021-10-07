@@ -332,7 +332,7 @@ Narciso M. Quijada, David Rodríguez-Lázaro, Jose María Eiros and Marta Herná
 
 <br>
 
-The dependencies described in [this section](#required-dependencies) are the backbone of TORMES, and users are encouraged to cite them when using TORMES.
+The dependencies described in [this section](#required-dependencies) are the backbone of TORMES, and users must cite them when using TORMES. You can find an example on how to do so [in this section of the Wiki](https://github.com/nmquijada/tormes/wiki/How-to-cite-TORMES-and-the-included-software).
 
 <br>
 
