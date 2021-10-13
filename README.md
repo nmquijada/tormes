@@ -235,23 +235,14 @@ tormes --metadata salmonella_metadata.txt --output Salmonella_TORMES_2020 --thre
 <br>
 
 ### Obligatory options
-A metadata text file is needed for TORMES to work by using the `-m/--metadata` option. This file will include all the information regarding the sample and requires an specific organization:
+A metadata text file is needed for TORMES to work by using the `-m/--metadata` option. If you would like to know a shortcut for generating this file automatically from all your samples, please visit [this section of the Wiki](https://github.com/nmquijada/tormes/wiki/Shortcut-to-generate-the-metadata-file-for-TORMES).  
+
+This metadata file will include all the information regarding the sample and requires an specific organization:
  - Columns should be tab separated.
  - First column must me called `Samples` and harbor samples names (avoid special characters ($, \*, ...) and spaces or names composed only by numbers).
- - Second column must be called `Read1` and harbor the path to the R1 (forward) reads (either fastq or fastq.gz).
- - Third column must be called `Read2` and harbor the path to the R2 (reverse) reads (either fastq or fastq.gz).
+ - Second column must be called `Read1` and harbor the path to the R1 (forward) reads (either fastq or fastq.gz). In the case you would like to include already assembled genomes in your analysis (with or without raw sequencing reads samples in the same analysis), this column has to contain the word "GENOME" (beware the capital letters!) for the already assembled genomes samples.
+ - Third column must be called `Read2` and harbor the path to the R2 (reverse) reads (either fastq or fastq.gz). In the case you are including already assembled genomes in your analysis, this column must harbor the path to the genome (in FASTA format).
  - Fourth (and so on) columns are descriptive. The information included here is not needed for TORMES to work but will be included in the interactive report. You can add as many description columns as needed (including information such as isolation date or source, different codification of each sample, *etc*.). Spaces can be added here.
-
-<br>
-
-**Since TORMES version 1.1, the inclusion of already assembled genomes in the analysis is allowed.** This genomes can be analyzed alone or in combination with raw sequencing data.
-If you would like to include genomes in the analysis, the same metadata file has to be used by respecting the following rules:
- - Columns must be tab separated
- - First column must me called `Samples` and harbor samples names (avoid special characters ($, \*, ...) and spaces or names composed only by numbers).
- - Second column must be called `Read1` and has to contain the word "GENOME" (beware the capital letters!)
- - Third column must be called `Read2` and harbor the path to the genome (in FASTA format)
- - Fourth (and so on) columns are descriptive. They are not needed for the program but the information will appear in the report
-          Add as much columns as you want. Spaces can be added here.
 
 <br>
 
