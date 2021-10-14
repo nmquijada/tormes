@@ -365,7 +365,8 @@ TORMES is a free software, licensed under [GPLv3](https://github.com/nmquijada/t
 <br>
 
 ## Versions history
-- **v.1.3.\*** (*current*)
+Get track of the improvements of each version [here](https://github.com/nmquijada/tormes/releases).
+- **v.1.3.\*** (June 2021, *current*)
 - **v.1.2.\*** (October 2020): New features: Kraken2 is now used instead of Kraken, increasing the sensitivity and speed for the taxonomic identification based on *k*-mers. Additionally, rRNA genes will be extracted from the genomes and the 16S rRNA genes will be  used for taxonomic classification by using the RDP Classifier.
 - **v.1.1.\*** (April 2020): New features: Enables the option to include already assembled genomes into the analysis, alone or in combination with raw sequencing data. Script "*render_report.sh*" is automatically generated in the "report_files" directory for easy generate the report.
 - **v.1.0.\*** (April 2019): original version of the TORMES pipeline.
