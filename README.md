@@ -247,7 +247,7 @@ This metadata file will include all the information regarding the sample and req
 <br>
 
 ONLY ONE METADATA FILE IS NEEDED! You must combine the information of raw reads and/or genomes in the same metadata file.
-This is an **example** of how the metadata file should looks like:
+This is an **example** of how the metadata file should look like:
 
 Samples | Read1 | Read2 | Description1 | Description2 |
 ------- | ----- | ----- | ------------ | ------------ |
