@@ -5,8 +5,12 @@
 <br>
 
 # TORMES
-An automated and user-friendly pipeline for whole bacterial genome analysis of your genomes (previously assembled or downloaded from any repository) and/or your raw Illumina paired-end sequencing data, regardless the number of bacterial isolates, their origin or taxonomy.
+TORMES is An automated and user-friendly pipeline for whole bacterial genome analysis of your genomes (previously assembled or downloaded from any repository) and/or your raw Illumina paired-end sequencing data, regardless the number of bacterial isolates, their origin or taxonomy.
 
+TORMES has been deviced to be run by following very simple commands, such as:  
+```tormes --metadata my-metadata.txt --output tormes-output```  
+
+Additinonally, further options can be added to the software, as described in the following sections of this manual.
 
 <br>
 
