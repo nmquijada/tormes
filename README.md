@@ -364,7 +364,7 @@ We are working for a finer tool for WGS that can be freely provided to the commu
 <br>
 
 ## License
-TORMES is a free software, licensed under [GPLv3](https://github.com/nmquijada/tormes/blob/master/LICENSE).
+TORMES is an open-source software, licensed under [GPLv3](https://github.com/nmquijada/tormes/blob/master/LICENSE).
 
 <br>
 
