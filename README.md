@@ -14,27 +14,16 @@ Additinonally, further options can be added to the software, as described in the
 
 <br>
 
-## UPDATE 08 June 2021: TORMES version 1.3.0 is released!
-
-This new version comes with a number of improvements!:
-
- -	Specific analyses for *Klebsiella* by enabling the ```--genera Klebsiella``` option. The specific analyses include: plasmid detection by using PlasmidFinder, detection of point mutations associated with antimicrobial resistance by using PointFinder and subtyping of the isolates based on surface polysaccharide locus: complex capsule (K) and on complex LPS (O) locus by using Kaptive.
- -  Possibility to perform nucleotide gene searches from user custom databases (must be nucleotide databases as the search is based on BLASTN by using ABRicate) by using the ```--custom_genes_db``` option (for instance ```--custom_genes_db "mydb1 mydb2 mydb3"```). You can use as many custom databases as you want. The custom databases must have been previously formatted and installed in TORMES (see the instructions in the [Wiki](https://github.com/nmquijada/tormes/wiki/Installing-and-using-custom-nucleotide-databases-in-TORMES)).
- -  You can set the maximum number of threads to use for genome assembly by using the ```--max_cpus_per_assembly``` option. For instance, if you set ```--threads 48``` (which set the maximum number of threads for TORMES to use to 48) and ```--max_cpus_per_assembly 8```, this will make TORMES to perform 6 assemblies in parallel by using 8 threads per assembly. Further descriptions of advantages and disadvantages will be discussed in the Wiki soon.
- -  Set the minimum contig length of your assemblies by using the ```--min_contig_len``` option (default=200).
- -  Possibility to modify the minimum percentage of coverage and identity of genes’ searches by using the ```--gene_min_cov``` and the ```--gene_min_id``` options, respectively (default = 80).
- -  Disable genome annotation by Prokka and just perform gene prediction with Prodigal (```--only_gene_prediction``` option. Default=no)
- -  You can set further options to be parsed to Prodigal as a string after the ```--prodigal_options``` flag (it requires the ```--only_gene_prediction``` option to enabled).
- -  A “citation.txt” file will be created in your run including the citations of each of the software and databases that were used in your analysis (will also be included in the “Citations” section of the tormes-report). TORMES is a pipeline that rely on all the software included in each "citations.txt" file and we strongly encourage to cite them all when citing TORMES (some excamples will appear in the Wiki soon)
- -  The "DT" R package is now used for the tormes-report generation, which renders interactive tables in the *tormes_report.html* file.
-
-
-<br>
-
 *All the information contained in this README refers to **TORMES version 1.3.0***
 Get track of the improvements in TORMES pipeline in the [Versions history](#versions-history) section.
 For further information or additional uses you can also visit the [TORMES wiki](https://github.com/nmquijada/tormes/wiki).
 
+<br>
+
+## UPDATE 07 March 2023: new installation instructions for TORMES version 1.3.0
+
+Recently, some issues with the installation of some dependencies included in TORMES were causing issues that made the pipeline not to finish succesfully. The novel installation instructions are posted [here](#installation).  
+If you encounter any issues, please post them in the [issues](https://github.com/nmquijada/tormes/issues) section of the repository.
 
 <br>
 
@@ -101,28 +90,53 @@ We would like TORMES to be regularly updated with the most novel tools and datab
 
 ## Installation
 
-TORMES is a pipeline that requires a lot of dependencies to work. It has been devised to be used as a conda environment. For installing TORMES an all its dependencies run:
+TORMES is a pipeline that requires a lot of dependencies to work. It has been devised to be used as a conda environment. Please follow the **three steps** below to install TORMES:
 
-```
-wget https://anaconda.org/nmquijada/tormes-1.3.0/2021.06.08.113021/download/tormes-1.3.0.yml
-conda env create -n tormes-1.3.0 --file tormes-1.3.0.yml
-```
 <br>
 
-To activate TORMES environment run:
+### 1. Download the yml file
+
+```
+wget https://raw.githubusercontent.com/biobrad/Tormes-Meta-Create/main/tormes-1.3.0.yml
+```
+
+<br>
+
+### 2. Use the yml file to create the environment
+
+You can use this file to create an environment by using conda or mamba:  
+
+#### Using conda
+
+```
+conda env create -n tormes-1.3.0 --file tormes-1.3.0.yml
+```
+
+#### Using mamba
+
+We have experienced long times while solving environment by using conda in some cases. If this happens to you, you can install the environment by using [Mamba](https://mamba.readthedocs.io/en/latest/installation.html).  
+To install mamba, please make sure you do so in the "base" environment, as its installation in any other environment is not supported:  
+
+```
+conda install mamba -n base -c conda-forge
+```
+
+Once you have mamba installed run:
+
+```
+mamba env create -n tormes-1.3.0 --file tormes-1.3.0.yml
+```
+
+<br>
+
+### 3. Activate TORMES environment and install the remaining dependencies
 
 ```
 conda activate tormes-1.3.0
-```
-<br>
-
-Additionally, the first time you are using TORMES, run (after activating TORMES environment):
-
-```
 tormes-setup
 ```
 
-This step will install additional dependencies not available in conda and will automatically create the **config_file.txt** required for TORMES to work (see below).
+Thes `tormes-setup` step has to be run only once when you are installing TORMES. This step will install additional dependencies not available in conda and will automatically create the **config_file.txt** required for TORMES to work (see below).
 This script will download the [MiniKraken2_v1_8GB](https://ccb.jhu.edu/software/kraken2/index.shtml?t=downloads) database required for Kraken2 to work. This database takes ~8 GB space and it is downloaded by default in order to facilitate TORMES installation. If the user has enough disk space and RAM power, we encourage to download and install the "Standard Kraken2 Database" by following the instructions provided by [Kraken2 developers](https://github.com/DerrickWood/kraken2/wiki/Manual#standard-kraken-2-database). The "Standard Kraken2 Database" will increase the sensitivity of the taxonomic identification. However, this is not needed for running TORMES. It will equally work with the MiniKraken2_v1_8GB.
 
 <br>
