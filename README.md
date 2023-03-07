@@ -89,7 +89,8 @@ We would like TORMES to be regularly updated with the most novel tools and datab
 
 ## Installation
 
-TORMES is a pipeline that requires a lot of dependencies to work. It has been devised to be used as a conda environment. Please follow the **three steps** below to install TORMES:
+TORMES is a pipeline that requires a lot of dependencies to work. It has been devised to be used as a conda environment (if you don't have conda installed, please do so by following the instructions provided [here](https://conda.io/projects/conda/en/latest/user-guide/install/index.html).  
+Please follow the **three steps** below to install TORMES:
 
 <br>
 
@@ -108,6 +109,7 @@ You can use this file to create an environment by using conda or mamba:
 #### Using conda
 
 ```
+conda update -n base -c conda-forge conda -y
 conda env create -n tormes-1.3.0 --file tormes-1.3.0.yml
 ```
 
