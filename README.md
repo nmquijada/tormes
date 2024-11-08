@@ -19,10 +19,8 @@ For further information or additional uses you can also visit the [TORMES wiki](
 
 <br>
 
-## UPDATE 07 March 2023: new installation instructions for TORMES version 1.3.0
-
-Recently, some issues with the installation of some dependencies included in TORMES were causing issues that made the pipeline not to finish succesfully. The novel installation instructions are posted [here](#installation).  
-If you encounter any issues, please post them in the [issues](https://github.com/nmquijada/tormes/issues) section of the repository.
+## UPDATE November 2024: We are transitioning to TORMES v2.0
+A `beta`version will be available for testing soon :)
 
 <br>
 
